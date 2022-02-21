@@ -1,9 +1,13 @@
 package tn.esprit.spring.Entity;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
+@Data
 @Entity
 public class Tag implements Serializable {
     @Id
@@ -12,21 +16,25 @@ public class Tag implements Serializable {
     private String name;
     private String description;
     private String color;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "postTags")
+    private List<NewsfeedPost> posts = new ArrayList<>();
 
     public Tag() {
     }
 
-    public Tag(Long id, String name, String description, String color) {
+    public Tag(Long id, String name, String description, String color, List<NewsfeedPost> posts) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.color = color;
+        this.posts = posts;
     }
 
-    public Tag(String name, String description, String color) {
+    public Tag(String name, String description, String color, List<NewsfeedPost> posts) {
         this.name = name;
         this.description = description;
         this.color = color;
+        this.posts = posts;
     }
 
     public Long getId() {
@@ -61,13 +69,11 @@ public class Tag implements Serializable {
         this.color = color;
     }
 
-    @Override
-    public String toString() {
-        return "Tag{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+    public List<NewsfeedPost> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<NewsfeedPost> posts) {
+        this.posts = posts;
     }
 }

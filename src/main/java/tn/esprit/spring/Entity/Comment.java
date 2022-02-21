@@ -1,2 +1,38 @@
-package tn.esprit.spring.Entity;public class Comment {
+package tn.esprit.spring.Entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+@Data
+@Entity
+public class Comment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+
+    @ManyToOne
+    private BsUser commentedby;
+
+    @ManyToOne
+    private NewsfeedPost newsfeedPost;
+
+    @ManyToOne
+    private Comment comment;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="comment", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Comment> comments = new ArrayList<>();
+
+    private String content;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
+
+
 }

@@ -1,12 +1,13 @@
 package tn.esprit.spring.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
 @Entity
 public class BsUser implements Serializable {
     @Id
@@ -15,20 +16,11 @@ public class BsUser implements Serializable {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy="users", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<NewsfeedPost> baskets = new ArrayList<>();
+    @OneToMany(mappedBy="postedby", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<NewsfeedPost> newsfeedPosts = new ArrayList<>();
 
-    public BsUser() {
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy="commentedby", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Comment> comments = new ArrayList<>();
 
-    public BsUser(Long id, String name, List<NewsfeedPost> baskets) {
-        this.id = id;
-        this.name = name;
-        this.baskets = baskets;
-    }
-
-    public BsUser(String name, List<NewsfeedPost> baskets) {
-        this.name = name;
-        this.baskets = baskets;
-    }
 }

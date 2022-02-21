@@ -13,9 +13,9 @@ public class TagService implements ITagService {
     @Autowired
     TagRepository tagRepository;
     @Override
-    public Long ajouterTag(Tag tag) {
+    public Tag ajouterTag(Tag tag) {
         tagRepository.save(tag);
-        return tag.getId();
+        return tag;
     }
 
     @Override
@@ -31,9 +31,9 @@ public class TagService implements ITagService {
     }
 
     @Override
-    public Long modifierTag( Tag tag) {
+    public Tag modifierTag( Tag tag) {
         tagRepository.save(tag);
-        return tag.getId();
+        return tag;
     }
 
     @Override

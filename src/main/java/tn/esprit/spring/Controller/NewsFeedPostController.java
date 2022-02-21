@@ -14,31 +14,31 @@ public class NewsFeedPostController {
     INewsFeedPostService iNewsFeedPostService;
 
     @GetMapping
-    @RequestMapping(path ="/")
     public List<NewsfeedPost> getNewsFeedPosts(){
         return iNewsFeedPostService.getNewsfeedPosts();
     }
-    @GetMapping
-    @RequestMapping(path = "/{id}")
-    public NewsfeedPost getNewsFeedPost(@RequestParam("id") Long id){
+
+    @GetMapping({"/{id}"})
+    public NewsfeedPost getNewsFeedPost(@PathVariable Long id){
         return iNewsFeedPostService.getNewsfeedPost(id);
     }
 
     @PostMapping
-    @RequestMapping(path = "new")
-    public void add(NewsfeedPost newsFeedPost){
-        iNewsFeedPostService.ajouterNewsfeedPost(newsFeedPost);
+    @RequestMapping(path = "/new")
+    @ResponseBody
+    public NewsfeedPost add(@RequestBody NewsfeedPost newsFeedPost){
+       return iNewsFeedPostService.ajouterNewsfeedPost(newsFeedPost);
     }
 
-    @PostMapping
+    @PutMapping
     @RequestMapping(path = "/edit")
-    public void edit(NewsfeedPost newsFeedPost){
-        iNewsFeedPostService.modifierNewsfeedPost(newsFeedPost);
+    @ResponseBody
+    public NewsfeedPost edit(@RequestBody NewsfeedPost newsFeedPost){
+       return iNewsFeedPostService.modifierNewsfeedPost(newsFeedPost);
     }
 
-    @DeleteMapping
-    @RequestMapping(path = "/delete/{id}")
-    public void delete(@RequestParam("id") Long id){
+    @DeleteMapping({"/delete/{id}"})
+    public void delete(@PathVariable Long id){
         iNewsFeedPostService.deleteNewsfeedPost(id);
     }
 

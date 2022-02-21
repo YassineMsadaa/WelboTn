@@ -20,27 +20,29 @@ public class TagController {
     public List<Tag> getTags(){
        return iTagService.getTags();
    }
-   @GetMapping
-   @RequestMapping(path = "/{id}")
-   public Tag getTag(@RequestParam("id") Long id){
+
+    @GetMapping({"/{id}"})
+   public Tag getTag(@PathVariable Long id){
        return iTagService.getTag(id);
    }
 
-   @PostMapping
-   @RequestMapping(path = "new")
-    public void add(Tag tag){
-        iTagService.ajouterTag(tag);
-    }
-
     @PostMapping
-    @RequestMapping(path = "/edit")
-    public void edit(Tag tag){
-       iTagService.modifierTag(tag);
+    @RequestMapping(path = "/new")
+    @ResponseBody
+    public Tag add(@RequestBody Tag tag){
+
+        return iTagService.ajouterTag(tag);
     }
 
-    @DeleteMapping
-    @RequestMapping(path = "/delete/{id}")
-    public void delete(@RequestParam("id") Long id){
+    @PutMapping
+    @RequestMapping(path = "/edit")
+    @ResponseBody
+    public Tag edit(@RequestBody Tag tag){
+       return iTagService.modifierTag(tag);
+    }
+
+    @DeleteMapping({"/delete/{id}"})
+    public void delete(@PathVariable Long id){
        iTagService.deleteTag(id);
     }
 
