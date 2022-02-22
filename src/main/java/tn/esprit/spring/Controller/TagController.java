@@ -17,10 +17,7 @@ public class TagController {
 
     @Autowired
     ITagService iTagService;
-    @Autowired
-    NewsFeedPostRepository newsFeedPostRepository;
-    @Autowired
-    private TagRepository tagRepository;
+
 
 
    @GetMapping
@@ -53,7 +50,8 @@ public class TagController {
     public void delete(@PathVariable Long id){
        iTagService.deleteTag(id);
     }
-    @PostMapping("/NewsfeedPosts/{NewsfeedPostId}/tags")
+
+   /* @PostMapping("/NewsfeedPosts/{NewsfeedPostId}/tags")
     public ResponseEntity<Tag> addTag(@PathVariable(value = "NewsfeedPostId") Long NewsfeedPostId, @RequestBody Tag tagRequest) {
         Tag tag = newsFeedPostRepository.findById(NewsfeedPostId).map(NewsfeedPost -> {
 
@@ -72,29 +70,10 @@ public class TagController {
             return tagRepository.save(tagRequest);
         }).get();
         return new ResponseEntity<>(tag, HttpStatus.CREATED);
-    }
-    @PostMapping("/NewsfeedPosts1/{NewsfeedPostId}/tags")
-    public ResponseEntity<Tag> addTag1(@PathVariable(value = "NewsfeedPostId") Long NewsfeedPostId, @RequestBody List<Tag> tagRequest) {
-       Tag tag = new Tag();
-        for (Tag tag12 : tagRequest){
-        tag = newsFeedPostRepository.findById(NewsfeedPostId).map(NewsfeedPost -> {
-
-                long tagId = tag12.getId();
-                // tag is existed
-                if (tagId != 0L) {
-                    Tag _tag = tagRepository.findById(tagId).get();
-                    NewsfeedPost.addTag(_tag);
-                    newsFeedPostRepository.save(NewsfeedPost);
-                    return _tag;
-                }
-                // add and create new Tag
-                NewsfeedPost.addTag(tag12);
-
-
-            return tagRepository.save(tag12);
-        }).get();
-        }
-        return new ResponseEntity<>(tag, HttpStatus.CREATED); 
+    }*/
+    @PostMapping("/NewsfeedPosts/{NewsfeedPostId}/tags")
+    public ResponseEntity<List<Tag>> addTagsToPost(@PathVariable(value = "NewsfeedPostId") Long NewsfeedPostId, @RequestBody List<Tag> tagRequest) {
+        return   iTagService.addTagsToPost(NewsfeedPostId,  tagRequest);
     }
 
 }

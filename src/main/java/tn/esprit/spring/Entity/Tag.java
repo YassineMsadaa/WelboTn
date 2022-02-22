@@ -18,6 +18,7 @@ public class Tag implements Serializable {
     private String description;
     private String color;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "postTags")
     private List<NewsfeedPost> posts = new ArrayList<>();
 

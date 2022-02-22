@@ -1,5 +1,7 @@
 package tn.esprit.spring.Service;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import tn.esprit.spring.Entity.Tag;
 
 
@@ -11,4 +13,5 @@ public interface ITagService {
     public List<Tag> getTags();
     public Tag modifierTag(Tag tag);
     public Tag getTag(Long tagId);
+    public ResponseEntity<List<Tag>> addTagsToPost (Long NewsfeedPostId, List<Tag> tagRequest);
 }
