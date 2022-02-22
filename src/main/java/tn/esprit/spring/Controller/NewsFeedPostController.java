@@ -3,6 +3,7 @@ package tn.esprit.spring.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.Entity.NewsfeedPost;
+import tn.esprit.spring.Entity.Tag;
 import tn.esprit.spring.Service.INewsFeedPostService;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class NewsFeedPostController {
     public void delete(@PathVariable Long id){
         iNewsFeedPostService.deleteNewsfeedPost(id);
     }
+
 
 
 }

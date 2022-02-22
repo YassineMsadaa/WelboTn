@@ -1,6 +1,7 @@
 package tn.esprit.spring.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Tag implements Serializable {
     private String name;
     private String description;
     private String color;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "postTags")
     private List<NewsfeedPost> posts = new ArrayList<>();
 
@@ -75,5 +77,8 @@ public class Tag implements Serializable {
 
     public void setPosts(List<NewsfeedPost> posts) {
         this.posts = posts;
+    }
+    public void addPost(NewsfeedPost post){
+        posts.add(post);
     }
 }

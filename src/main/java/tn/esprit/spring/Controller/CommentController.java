@@ -20,27 +20,27 @@ public class CommentController {
     public List<Comment> getComments(){
         return iCommentService.getComments();
     }
-    @GetMapping
-    @RequestMapping(path = "/{id}")
-    public Comment getComment(@RequestParam("id") Long id){
+    @GetMapping({"/{id}"})
+    public Comment getComment(@PathVariable Long id){
         return iCommentService.getComment(id);
     }
 
     @PostMapping
     @RequestMapping(path = "/new")
-    public void add(Comment comment){
-        iCommentService.ajouterComment(comment);
+    @ResponseBody
+    public Comment add(@RequestBody Comment comment){
+        return iCommentService.ajouterComment(comment);
     }
 
-    @PostMapping
+    @PutMapping
     @RequestMapping(path = "/edit")
-    public void edit(Comment comment){
-        iCommentService.modifierComment(comment);
+    @ResponseBody
+    public Comment edit(@RequestBody Comment comment){
+        return iCommentService.modifierComment(comment);
     }
 
-    @DeleteMapping
-    @RequestMapping(path = "/delete/{id}")
-    public void delete(@RequestParam("id") Long id){
+    @DeleteMapping({"/delete/{id}"})
+    public void delete(@PathVariable Long id){
         iCommentService.deleteComment(id);
     }
 }

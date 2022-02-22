@@ -6,6 +6,7 @@ import tn.esprit.spring.Entity.Comment;
 import tn.esprit.spring.Entity.Comment;
 import tn.esprit.spring.Repository.CommentRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -13,9 +14,10 @@ public class CommentService implements ICommentService{
     @Autowired
     CommentRepository commentRepository;
     @Override
-    public Long ajouterComment(Comment comment) {
+    public Comment ajouterComment(Comment comment) {
+        comment.setCreatedAt(LocalDateTime.now());
         commentRepository.save(comment);
-        return comment.getId();
+        return comment;
     }
 
     @Override
@@ -31,9 +33,10 @@ public class CommentService implements ICommentService{
     }
 
     @Override
-    public Long modifierComment( Comment comment) {
+    public Comment modifierComment( Comment comment) {
+        comment.setUpdatedAt(LocalDateTime.now());
         commentRepository.save(comment);
-        return comment.getId();
+        return comment;
     }
 
     @Override
