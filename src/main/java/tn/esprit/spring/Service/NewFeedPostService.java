@@ -3,6 +3,7 @@ package tn.esprit.spring.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import tn.esprit.spring.Entity.BsUser;
 import tn.esprit.spring.Entity.NewsfeedPost;
 import tn.esprit.spring.Entity.Tag;
 import tn.esprit.spring.Repository.NewsFeedPostRepository;
@@ -21,6 +22,8 @@ public class NewFeedPostService implements INewsFeedPostService {
     private TagRepository tagRepository;
     @Override
     public NewsfeedPost ajouterNewsfeedPost(NewsfeedPost newsfeedPost) {
+        newsfeedPost.setCreatedAt(LocalDateTime.now());
+        newsfeedPost.setModifiedAt(LocalDateTime.now());
         newsFeedPostRepository.save(newsfeedPost);
         return newsfeedPost;
     }
@@ -46,6 +49,11 @@ public class NewFeedPostService implements INewsFeedPostService {
     @Override
     public NewsfeedPost getNewsfeedPost(Long newsfeedPostId) {
         return newsFeedPostRepository.findById(newsfeedPostId).get();
+    }
+
+    @Override
+    public List<NewsfeedPost> getPostsByPostedBy(BsUser postedBy) {
+        return newsFeedPostRepository.findByPostedby(postedBy);
     }
 
 

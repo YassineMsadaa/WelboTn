@@ -50,7 +50,7 @@ public class TagService implements ITagService {
     }
 
     @Override
-    public ResponseEntity<List<Tag>> addTagsToPost(Long NewsfeedPostId, List<Tag> tagRequest) {
+    public List<Tag> addTagsToPost(Long NewsfeedPostId, List<Tag> tagRequest) {
         Tag tag = new Tag();
         for (Tag tag12 : tagRequest){
             tag = newsFeedPostRepository.findById(NewsfeedPostId).map(NewsfeedPost -> {
@@ -70,7 +70,7 @@ public class TagService implements ITagService {
                 return tagRepository.save(tag12);
             }).get();
         }
-        return new ResponseEntity<>(tagRequest, HttpStatus.CREATED);
+        return tagRequest;
     }
 
 

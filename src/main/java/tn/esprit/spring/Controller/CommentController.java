@@ -1,7 +1,9 @@
 package tn.esprit.spring.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.spring.Entity.CollaboratorContact;
 import tn.esprit.spring.Entity.Comment;
 import tn.esprit.spring.Service.ICommentService;
 
@@ -42,5 +44,11 @@ public class CommentController {
     @DeleteMapping({"/delete/{id}"})
     public void delete(@PathVariable Long id){
         iCommentService.deleteComment(id);
+    }
+
+    // comments by post
+    @GetMapping("/post/{postId}")
+    public ResponseEntity<List<Comment>> commentByPost(@PathVariable(value = "postId") Long postId) {
+        return   iCommentService.getCommentsByPost(postId);
     }
 }

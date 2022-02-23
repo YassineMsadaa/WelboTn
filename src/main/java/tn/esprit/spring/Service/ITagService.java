@@ -13,5 +13,5 @@ public interface ITagService {
     public List<Tag> getTags();
     public Tag modifierTag(Tag tag);
     public Tag getTag(Long tagId);
-    public ResponseEntity<List<Tag>> addTagsToPost (Long NewsfeedPostId, List<Tag> tagRequest);
+    public List<Tag> addTagsToPost (Long NewsfeedPostId, List<Tag> tagRequest);
 }

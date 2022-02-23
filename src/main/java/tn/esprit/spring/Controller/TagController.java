@@ -73,7 +73,7 @@ public class TagController {
     }*/
     @PostMapping("/NewsfeedPosts/{NewsfeedPostId}/tags")
     public ResponseEntity<List<Tag>> addTagsToPost(@PathVariable(value = "NewsfeedPostId") Long NewsfeedPostId, @RequestBody List<Tag> tagRequest) {
-        return   iTagService.addTagsToPost(NewsfeedPostId,  tagRequest);
+        return  new ResponseEntity<>(iTagService.addTagsToPost(NewsfeedPostId,  tagRequest), HttpStatus.CREATED);
     }
 
 }

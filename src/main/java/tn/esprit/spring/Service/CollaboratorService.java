@@ -24,7 +24,6 @@ public class CollaboratorService implements ICollaboratorService {
     @Override
     public void deleteCollaborator(Long collaboratorId) {
         collaboratorRepository.deleteById(collaboratorId);
-
     }
 
     @Override
