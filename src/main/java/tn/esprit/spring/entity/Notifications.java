@@ -15,18 +15,18 @@ import javax.persistence.Table;
 public class Notifications implements Serializable{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int id; // Clé primaire
+	private Long id; // Clé primaire
 	
-	private int NotificationObjectId;
-	private int UserId;
+	private Long NotificationObjectId;
+	private Long UserId;
 	private Boolean Status;
 	
-	public int getId() {return id;}
-	public void setId(int id) {this.id = id;}
-	public int getNotificationObjectId() {return NotificationObjectId;}
-	public void setNotificationObjectId(int notificationObjectId) {	NotificationObjectId = notificationObjectId;}
-	public int getUserId() {return UserId;}
-	public void setUserId(int userId) {UserId = userId;}
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
+	public Long getNotificationObjectId() {return NotificationObjectId;}
+	public void setNotificationObjectId(Long notificationObjectId) {	NotificationObjectId = notificationObjectId;}
+	public Long getUserId() {return UserId;}
+	public void setUserId(Long userId) {UserId = userId;}
 	public Boolean getStatus() {return Status;}
 	public void setStatus(Boolean status) {Status = status;}
 }

@@ -16,12 +16,12 @@ import javax.persistence.Table;
 public class Categories implements Serializable{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int id; // Clé primaire
+	private Long id; // Clé primaire
 	
 	private String CategName;
 
-	public int getId() {return id;}
-	public void setId(int id) {this.id = id;}
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
 	public String getCategName() {return CategName;}
 	public void setCategName(String categName) {CategName = categName;}
 }

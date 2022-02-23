@@ -15,15 +15,15 @@ import javax.persistence.Table;
 public class Questions implements Serializable{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int id; // Clé primaire
+	private Long id; // Clé primaire
 	
 	private String Content;
-	private int QuestionaireId;
+	private Long QuestionaireId;
 	
-	public int getId() {return id;}
-	public void setId(int id) {this.id = id;}
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
 	public String getContent() {return Content;}
 	public void setContent(String content) {Content = content;}
-	public int getQuestionaireId() {return QuestionaireId;}
-	public void setQuestionaireId(int questionaireId) {QuestionaireId = questionaireId;}
+	public Long getQuestionaireId() {return QuestionaireId;}
+	public void setQuestionaireId(Long questionaireId) {QuestionaireId = questionaireId;}
 }

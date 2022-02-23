@@ -18,26 +18,26 @@ import javax.persistence.TemporalType;
 public class ForumPosts implements Serializable{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int id; // Clé primaire
+	private Long id; // Clé primaire
 	
-	private int UserId;
+	private Long UserId;
 	private String Description;
 	private String Attachement;
-	private int CategorieId;
+	private Long CategorieId;
 	
 	@Temporal(TemporalType.DATE)
 	private Date UploadTime;
 	
-	public int getId() {return id;}
-	public void setId(int id) {this.id = id;}
-	public int getUserId() {return UserId;}
-	public void setUserId(int userId) {UserId = userId;}
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
+	public Long getUserId() {return UserId;}
+	public void setUserId(Long userId) {UserId = userId;}
 	public String getDescription() {return Description;}
 	public void setDescription(String description) {Description = description;}
 	public String getAttachement() {return Attachement;}
 	public void setAttachement(String attachement) {Attachement = attachement;}
 	public Date getUploadTime() {return UploadTime;}
 	public void setUploadTime(Date uploadTime) {UploadTime = uploadTime;}
-	public int getCategorieId() {return CategorieId;}
-	public void setCategorieId(int categorieId) {CategorieId = categorieId;}
+	public Long getCategorieId() {return CategorieId;}
+	public void setCategorieId(Long categorieId) {CategorieId = categorieId;}
 }
