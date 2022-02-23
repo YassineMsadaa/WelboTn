@@ -24,8 +24,7 @@ public class NewFeedPostService implements INewsFeedPostService {
     public NewsfeedPost ajouterNewsfeedPost(NewsfeedPost newsfeedPost) {
         newsfeedPost.setCreatedAt(LocalDateTime.now());
         newsfeedPost.setModifiedAt(LocalDateTime.now());
-        newsFeedPostRepository.save(newsfeedPost);
-        return newsfeedPost;
+        return newsFeedPostRepository.save(newsfeedPost);
     }
 
     @Override
@@ -35,7 +34,6 @@ public class NewFeedPostService implements INewsFeedPostService {
 
     @Override
     public List<NewsfeedPost> getNewsfeedPosts() {
-
         return (List<NewsfeedPost>) newsFeedPostRepository.findAll();
     }
 

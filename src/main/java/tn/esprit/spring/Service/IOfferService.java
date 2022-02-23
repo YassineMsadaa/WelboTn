@@ -10,4 +10,5 @@ public interface IOfferService {
     public List<Offer> getOffers();
     public Offer modifierOffer(Offer offer);
     public Offer getOffer(Long offerId);
+    public Offer updateOfferState(Long offerId);
 }

@@ -14,6 +14,7 @@ public class OfferService implements IOfferService{
     OfferRepository offerRepository;
     @Override
     public Offer ajouterOffer(Offer offer) {
+        offer.setState(false);
         offer.setCreatedAt(LocalDateTime.now());
         offerRepository.save(offer);
         return offer;
@@ -41,5 +42,12 @@ public class OfferService implements IOfferService{
     @Override
     public Offer getOffer(Long offerId) {
         return offerRepository.findById(offerId).get();
+    }
+
+    @Override
+    public Offer updateOfferState(Long offerId) {
+        Offer offer = offerRepository.findById(offerId).get();
+        offer.setState(!offer.getState());
+        return offer;
     }
 }
