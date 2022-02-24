@@ -26,9 +26,8 @@ public class Votes implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int idBadge;
-	private int idVoter;
-	private int idVoted;
+	private int idBadges;
+	private int NbVote;
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="vote")
 	private List<Badges> badge;
 	@ManyToOne

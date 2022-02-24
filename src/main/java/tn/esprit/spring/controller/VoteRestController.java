@@ -12,12 +12,12 @@ import tn.esprit.spring.entities.Votes;
 import tn.esprit.spring.services.VotesServiceImpl;
 
 @RestController
-@RequestMapping("/vote")
+@RequestMapping("/Votes")
 public class VoteRestController {
 @Autowired
 VotesServiceImpl votesServiceImpl;
 
-@PostMapping("/ add-Votes")
+@PostMapping("/add-vote")
 @ResponseBody
 public Votes addVotes(@RequestBody Votes v)
 {
