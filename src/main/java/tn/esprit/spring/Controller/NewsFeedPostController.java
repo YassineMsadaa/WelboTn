@@ -1,10 +1,14 @@
 package tn.esprit.spring.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import tn.esprit.spring.Entity.BannedWords;
 import tn.esprit.spring.Entity.BsUser;
 import tn.esprit.spring.Entity.NewsfeedPost;
 import tn.esprit.spring.Entity.Tag;
+import tn.esprit.spring.Service.IBannedWordsService;
 import tn.esprit.spring.Service.IBsuserService;
 import tn.esprit.spring.Service.INewsFeedPostService;
 
@@ -18,13 +22,14 @@ public class NewsFeedPostController {
     @Autowired
     IBsuserService iBsuserService;
 
+
     @GetMapping
-    public List<NewsfeedPost> getNewsFeedPosts(){
+    public ResponseEntity<Object> getNewsFeedPosts(){
         return iNewsFeedPostService.getNewsfeedPosts();
     }
 
     @GetMapping({"/user/{userId}"})
-    public List<NewsfeedPost> getNewsFeedPostsByUser(@PathVariable Long userId){
+    public ResponseEntity<Object> getNewsFeedPostsByUser(@PathVariable Long userId){
         BsUser user = new BsUser();
         user = iBsuserService.getBsUser(userId);
 
@@ -32,27 +37,28 @@ public class NewsFeedPostController {
     }
 
     @GetMapping({"/{id}"})
-    public NewsfeedPost getNewsFeedPost(@PathVariable Long id){
+    public ResponseEntity<Object> getNewsFeedPost(@PathVariable Long id){
         return iNewsFeedPostService.getNewsfeedPost(id);
     }
 
     @PostMapping
     @RequestMapping(path = "/new")
     @ResponseBody
-    public NewsfeedPost add(@RequestBody NewsfeedPost newsFeedPost){
+    public ResponseEntity<Object> add(@RequestBody NewsfeedPost newsFeedPost,@RequestParam("image") MultipartFile file){
+
        return iNewsFeedPostService.ajouterNewsfeedPost(newsFeedPost);
     }
 
     @PutMapping
     @RequestMapping(path = "/edit")
     @ResponseBody
-    public NewsfeedPost edit(@RequestBody NewsfeedPost newsFeedPost){
+    public ResponseEntity<Object> edit(@RequestBody NewsfeedPost newsFeedPost){
        return iNewsFeedPostService.modifierNewsfeedPost(newsFeedPost);
     }
 
     @DeleteMapping({"/delete/{id}"})
-    public void delete(@PathVariable Long id){
-        iNewsFeedPostService.deleteNewsfeedPost(id);
+    public ResponseEntity<Object> delete(@PathVariable Long id){
+        return iNewsFeedPostService.deleteNewsfeedPost(id);
     }
 
 

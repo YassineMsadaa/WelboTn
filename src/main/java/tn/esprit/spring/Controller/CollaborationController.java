@@ -99,7 +99,7 @@ public class CollaborationController {
     public List<Offer> getOffers(){
         return iOfferService.getOffers();
     }
-    @GetMapping({"/{id}"})
+    @GetMapping({"/offer/{id}"})
     public Offer getOffer(@PathVariable Long id){
         return iOfferService.getOffer(id);
     }

@@ -40,6 +40,15 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+		<dependency>
+			<groupId>com.rometools</groupId>
+			<artifactId>rome</artifactId>
+			<version>1.10.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
     </dependencies>
 
 	<build>

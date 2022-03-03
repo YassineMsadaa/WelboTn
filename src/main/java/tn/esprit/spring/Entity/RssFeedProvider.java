@@ -7,11 +7,13 @@ import java.io.Serializable;
 
 @Data
 @Entity
-public class RssFeed implements Serializable {
+public class RssFeedProvider implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private 
+    private String name;
+    private String link;
+    private String image;
 
 }
