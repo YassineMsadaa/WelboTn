@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,8 +37,10 @@ public class User implements Serializable{
 	private int phoneNum;
 	private String jobTitle;
 	private String profilePic;
+	@JsonIgnore
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="user")
 	private List<Votes> vote;
+	@JsonIgnore
 	@ManyToMany(mappedBy="evalUser", cascade= CascadeType.ALL)
 	private List<Evaluation> evaluation;
 	

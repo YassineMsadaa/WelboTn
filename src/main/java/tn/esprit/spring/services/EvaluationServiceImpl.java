@@ -16,4 +16,6 @@ public interface EvaluationServiceImpl {
 
 	Evaluation retrieveEvaluation(Integer id);
 
+	Evaluation findEvaluationByEmail(String email);
+
 }

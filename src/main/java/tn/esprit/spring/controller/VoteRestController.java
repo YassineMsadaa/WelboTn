@@ -12,7 +12,7 @@ import tn.esprit.spring.entities.Votes;
 import tn.esprit.spring.services.VotesServiceImpl;
 
 @RestController
-@RequestMapping("/Votes")
+@RequestMapping("/vote")
 public class VoteRestController {
 @Autowired
 VotesServiceImpl votesServiceImpl;
@@ -24,7 +24,7 @@ public Votes addVotes(@RequestBody Votes v)
 Votes votes = votesServiceImpl.addVotes(v);
 return votes;
 }
-@GetMapping("/retrieve-All-Votes")
+@GetMapping("/retrieve-All-votes")
 @ResponseBody
 public List<Votes> getVotes() {
 	List<Votes> listVotes = votesServiceImpl.retrieveAllVotes();

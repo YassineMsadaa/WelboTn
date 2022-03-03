@@ -25,6 +25,7 @@ public class BadgeRestController {
 	Badges badges = badgesServiceImpl.addbadge(b);
 	return badges;
 	}
+	
 	@GetMapping("/retrieve-All-Badges")
 	@ResponseBody
 	public List<Badges> getBadges() {
