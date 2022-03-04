@@ -6,23 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tn.esprit.spring.Entity.BannedWords;
 import tn.esprit.spring.Entity.BsUser;
 import tn.esprit.spring.Entity.NewsfeedPost;
-import tn.esprit.spring.Entity.Tag;
 import tn.esprit.spring.Repository.NewsFeedPostRepository;
-import tn.esprit.spring.Repository.TagRepository;
 import tn.esprit.spring.response.ResponseHandler;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,55 +25,48 @@ public class NewFeedPostService implements INewsFeedPostService {
     static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
     @Autowired
     NewsFeedPostRepository newsFeedPostRepository;
-    @Autowired
-    private TagRepository tagRepository;
+
     @Autowired
     IBannedWordsService iBannedWordsService;
 
     public String checkForUnallowedwords(String text){
         String unallowedWords ="";
         List<BannedWords> bannedWords = iBannedWordsService.getBannedWordsList();
+        String formattedString = text.toLowerCase();
         for (BannedWords word : bannedWords){
             if( formattedString.contains(word.getWord())){
-                allowed = false;
+
                 unallowedWords = word.getWord() + ", "+unallowedWords;
             }
         }
+        return unallowedWords;
     }
     @Override
     public ResponseEntity<Object> ajouterNewsfeedPost(NewsfeedPost newsfeedPost) {
+        // check if content is not empty
         if(newsfeedPost.getContent().length() < 1){
             return ResponseHandler.generateResponse("Post content is empty", HttpStatus.MULTI_STATUS, newsfeedPost);
         }
-        NewsfeedPost addedpost = new NewsfeedPost();
-        boolean allowed = true;
-        String unallowedWords ="";
-        String originalString = newsfeedPost.getContent();
-        String formattedString = originalString.toLowerCase();
-        List<BannedWords> bannedWords = iBannedWordsService.getBannedWordsList();
-        for (BannedWords word : bannedWords){
-            if( formattedString.contains(word.getWord())){
-                allowed = false;
-                unallowedWords = word.getWord() + ", "+unallowedWords;
-            }
-        }
-        if (allowed){
-            newsfeedPost.setCreatedAt(LocalDateTime.now());
-            newsfeedPost.setModifiedAt(LocalDateTime.now());
-            try{
-                if(newsfeedPost.getImage().length()>0){
-                    String fileextension = FilenameUtils.getExtension(Paths.get(newsfeedPost.getImage()).getFileName().toString()).toLowerCase();
+        //get unallowed words in post content
+        String unallowedWords = checkForUnallowedwords(newsfeedPost.getContent());
 
+        if (unallowedWords.equals("")){
+            try{
+                //set createdAt and updatedAt
+                newsfeedPost.setCreatedAt(LocalDateTime.now());
+                newsfeedPost.setModifiedAt(LocalDateTime.now());
+                //check if image is not empty
+                if(newsfeedPost.getImage() != null){
+                    //get file extension
+                    String fileextension = FilenameUtils.getExtension(Paths.get(newsfeedPost.getImage()).getFileName().toString()).toLowerCase();
+                    //file must be an image
                     if (fileextension.equals("png") || fileextension.equals("jpg") || fileextension.equals("jpeg") ){
                         newsfeedPost.setImage(uploadImgAndGetUrl(newsfeedPost.getImage()));
-
                     }else {
                         return ResponseHandler.generateResponse("file extension "+fileextension+" is not allowed this is the list of allowed extensions: [png, jpg, jpeg]", HttpStatus.MULTI_STATUS, null);
                     }
-
                 }
-                addedpost = newsFeedPostRepository.save(newsfeedPost);
-                System.out.println(newsfeedPost.getImage());
+                NewsfeedPost addedpost = newsFeedPostRepository.save(newsfeedPost);
                 return ResponseHandler.generateResponse("Successfully added data!", HttpStatus.OK, addedpost);
             }catch (Exception e){
                 return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
@@ -102,7 +90,7 @@ public class NewFeedPostService implements INewsFeedPostService {
     @Override
     public ResponseEntity<Object> getNewsfeedPosts() {
         try{
-            return ResponseHandler.generateResponse("Success", HttpStatus.OK, (List<NewsfeedPost>) newsFeedPostRepository.findAll());
+            return ResponseHandler.generateResponse("Success", HttpStatus.OK, newsFeedPostRepository.findAll());
         }catch (Exception e){
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
         }
