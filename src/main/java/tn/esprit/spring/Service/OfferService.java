@@ -1,5 +1,6 @@
 package tn.esprit.spring.Service;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,19 @@ public class OfferService implements IOfferService{
     @Override
     public ResponseEntity<Object> ajouterOffer(Offer offer) {
         try{
-            offer.setImageUrl(uploadImgAndGetUrl(offer.getImageUrl()));
+            if(offer.getImageUrl() != null){
+                //get file extension
+                String fileextension = FilenameUtils.getExtension(Paths.get(offer.getImageUrl()).getFileName().toString()).toLowerCase();
+                //file must be an image
+                if (fileextension.equals("png") || fileextension.equals("jpg") || fileextension.equals("jpeg") ){
+                    offer.setImageUrl(uploadImgAndGetUrl(offer.getImageUrl()));
+                }else {
+                    return ResponseHandler.generateResponse("file extension "+fileextension+" is not allowed this is the list of allowed extensions: [png, jpg, jpeg]", HttpStatus.MULTI_STATUS, null);
+                }
+            }else {
+                return ResponseHandler.generateResponse("offer image is required !", HttpStatus.MULTI_STATUS, null);
+            }
+
             if(offer.getDescription().length()<=0){
                 return ResponseHandler.generateResponse("You should set offer description!", HttpStatus.NOT_FOUND, offer);
             }
@@ -147,10 +161,13 @@ public class OfferService implements IOfferService{
         return ResponseHandler.generateResponse("state updated!", HttpStatus.OK, offer);
 
     }
-  public String uploadImgAndGetUrl(String imageUrlFromComputer) throws IOException {
-     byte[] image = Files.readAllBytes(Paths.get(imageUrlFromComputer));
-     FileUtils.writeByteArrayToFile(new File("images/offers/"+Paths.get(imageUrlFromComputer).getFileName()), image);
-    return ServletUriComponentsBuilder.fromCurrentContextPath().path("/images/offers/"+Paths.get(imageUrlFromComputer).getFileName()).toUriString();
+    public String uploadImgAndGetUrl(String imageUrlFromComputer) throws IOException {
+        byte[] image = Files.readAllBytes(Paths.get(imageUrlFromComputer));
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        FileUtils.writeByteArrayToFile(new File("images/offers/"+formattedDateTime+Paths.get(imageUrlFromComputer).getFileName()), image);
+        return formattedDateTime+Paths.get(imageUrlFromComputer).getFileName().toString();
     }
 
 }
