@@ -4,6 +4,7 @@ package tn.esprit.spring.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.spring.Entity.*;
 import tn.esprit.spring.Entity.Collaborator;
 import tn.esprit.spring.Service.ICollaboratorContactService;
@@ -96,30 +97,45 @@ public class CollaborationController {
 
     @GetMapping
     @RequestMapping(path ="/offers")
-    public List<Offer> getOffers(){
+    public ResponseEntity<Object> getOffers(){
         return iOfferService.getOffers();
     }
+    @GetMapping({"/offers/state/{state}"})
+    public ResponseEntity<Object> getOffersByState(@PathVariable Boolean state){
+        return iOfferService.getOffersByState(state);
+    }
+
     @GetMapping({"/offer/{id}"})
-    public Offer getOffer(@PathVariable Long id){
+    public ResponseEntity<Object> getOffer(@PathVariable Long id){
         return iOfferService.getOffer(id);
     }
 
     @PostMapping
     @RequestMapping(path = "/offer/new")
     @ResponseBody
-    public Offer addOffer(@RequestBody Offer offer){
+    public ResponseEntity<Object> addOffer(@RequestBody Offer offer){
         return iOfferService.ajouterOffer(offer);
     }
 
     @PutMapping
     @RequestMapping(path = "/offer/edit")
     @ResponseBody
-    public Offer editOffer(@RequestBody Offer offer){
+    public ResponseEntity<Object> editOffer(@RequestBody Offer offer){
         return iOfferService.modifierOffer(offer);
     }
-
+    @PutMapping
+    @RequestMapping(path = "/offer/update/state/{id}")
+    @ResponseBody
+    public ResponseEntity<Object> editOfferState(@PathVariable Long id){
+        return iOfferService.updateOfferState(id);
+    }
     @DeleteMapping({"/offer/delete/{id}"})
-    public void deleteOffer(@PathVariable Long id){
-        iOfferService.deleteOffer(id);
+    public ResponseEntity<Object> deleteOffer(@PathVariable Long id){
+        return iOfferService.deleteOffer(id);
+    }
+
+    @PostMapping
+    public void uploadFile(@RequestParam("file") MultipartFile file ){
+
     }
 }

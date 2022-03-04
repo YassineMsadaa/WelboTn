@@ -8,11 +8,11 @@ import tn.esprit.spring.Entity.Tag;
 import java.util.List;
 
 public interface ICommentService {
-    public Comment ajouterComment(Comment comment);
-    public void deleteComment(Long commentId);
-    public List<Comment> getComments();
-    public Comment modifierComment(Comment comment);
-    public Comment getComment(Long commentId);
-    public ResponseEntity<List<Comment>> getCommentsByPost(Long postId);
+    public ResponseEntity<Object> ajouterComment(Comment comment);
+    public ResponseEntity<Object> deleteComment(Long commentId);
+    public ResponseEntity<Object> getComments();
+    public ResponseEntity<Object> modifierComment(Comment comment);
+    public ResponseEntity<Object> getComment(Long commentId);
+    public ResponseEntity<Object> getCommentsByPost(Long postId);
 
 }

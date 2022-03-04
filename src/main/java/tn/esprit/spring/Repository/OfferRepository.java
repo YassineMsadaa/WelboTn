@@ -4,6 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import tn.esprit.spring.Entity.Offer;
 
+import java.util.List;
+
 @Repository
 public interface OfferRepository extends CrudRepository<Offer,Long> {
+    List<Offer> findAllByState(Boolean state);
 }

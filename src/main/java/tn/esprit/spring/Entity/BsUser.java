@@ -14,7 +14,8 @@ public class BsUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
+    @ManyToOne
+    private RssSubscription subscription;
     @JsonIgnore
     @OneToMany(mappedBy="postedby", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<NewsfeedPost> newsfeedPosts = new ArrayList<>();
@@ -22,5 +23,9 @@ public class BsUser implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="commentedby", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Comment> comments = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy="subscriber", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<RssSubscription> subscriptions = new ArrayList<>();
+
 
 }

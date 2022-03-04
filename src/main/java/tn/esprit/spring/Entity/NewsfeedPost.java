@@ -1,5 +1,6 @@
 package tn.esprit.spring.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,8 +20,9 @@ public class NewsfeedPost implements Serializable {
     @ManyToOne
     private BsUser postedby;
 
-    private String image;
 
+    private String image;
+    private String imageUrl;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "newsfeedpostsTags",
@@ -31,6 +33,9 @@ public class NewsfeedPost implements Serializable {
     private LocalDateTime CreatedAt;
     private LocalDateTime ModifiedAt;
 
+    @JsonIgnore
+    @OneToMany(mappedBy="newsfeedPost", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Comment> comments = new ArrayList<>();
     public void addTag(Tag tag){
         postTags.add(tag);
     }

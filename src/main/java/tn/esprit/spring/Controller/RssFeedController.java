@@ -12,7 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.View;
+import tn.esprit.spring.Entity.BsUser;
 import tn.esprit.spring.Entity.NewsfeedPost;
+import tn.esprit.spring.Entity.RssFeedProvider;
+import tn.esprit.spring.Entity.RssSubscription;
+import tn.esprit.spring.Service.IRssProviderService;
+import tn.esprit.spring.Service.IRssSubscriptionService;
 import tn.esprit.spring.component.RssFeedView;
 
 import java.io.IOException;
@@ -23,53 +28,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping(path ="/api/RSS")
 public class RssFeedController {
     @Autowired
     private RssFeedView view;
-    @RequestMapping(value = "/rss", produces = "application/*")
+    @Autowired
+    IRssProviderService iRssProviderService;
+    @Autowired
+    IRssSubscriptionService iRssSubscriptionService;
+
+    @RequestMapping(value = "", produces = "application/*")
     public View getFeed() {
         return view;
     }
+//RSS
 
-
-
-    @GetMapping("/rss/all")
-    public List<NewsfeedPost> rssreader(){
-       String args = "https://feeds.skynews.com/feeds/rss/uk.xml";
-        boolean ok = false;
-        List<NewsfeedPost> list = new ArrayList<>();
-
-        if (args != "") {
-            try {
-                URL feedUrl = new URL(args);
-
-                SyndFeedInput input = new SyndFeedInput();
-                SyndFeed feed = input.build(new XmlReader(feedUrl));
-
-                List res = feed.getEntries();
-                for(Object o : res) {
-                    NewsfeedPost postFromXml = new NewsfeedPost();
-                  //System.out.println(((SyndEntryImpl) o).getDescription().getValue());
-                    String content = ((SyndEntryImpl) o).getDescription().getValue();
-                    System.out.println(content);
-                    postFromXml.setContent(content);
-                    list.add(postFromXml);
-                }
-
-                ok = true;
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-                System.out.println("ERROR: "+ex.getMessage());
-            }
-        }
-
-
-        return list;
+    @GetMapping("/for/{userId}")
+    public ResponseEntity<Object> rssByUser(@PathVariable Long userId){
+       return iRssSubscriptionService.rssByUser(userId);
     }
-    /*@GetMapping({"rss/{id}"})
+//RSS provider crud
+
+    @GetMapping("/providers")
+    public ResponseEntity<Object> getNewsFeedPosts(){
+        return iRssProviderService.getRssFeedProviders();
+    }
+
+    @GetMapping({"/provider/{id}"})
     public ResponseEntity<Object> getNewsFeedPost(@PathVariable Long id){
-        return iNewsFeedPostService.getNewsfeedPost(id);
-    }*/
+        return iRssProviderService.getRssFeedProvider(id);
+    }
+    @PostMapping
+    @RequestMapping(path = "/provider/new")
+    @ResponseBody
+    public ResponseEntity<Object> addProvider(@RequestBody RssFeedProvider rssFeedProvider){
+
+        return iRssProviderService.ajouterRssFeedProvider(rssFeedProvider);
+    }
+    @DeleteMapping({"/provider/delete/{id}"})
+    public ResponseEntity<Object> delete(@PathVariable Long id){
+        return iRssProviderService.deleteRssFeedProvider(id);
+    }
+    @PutMapping
+    @RequestMapping(path = "/provider/edit")
+    @ResponseBody
+    public ResponseEntity<Object> edit(@RequestBody RssFeedProvider rssFeedProvider){
+        return iRssProviderService.modifierRssFeedProvider(rssFeedProvider);
+    }
+    //RSS subscription
+    @PostMapping
+    @RequestMapping(path = "/subscribe/{subscriberId}/{providerId}")
+    @ResponseBody
+    public ResponseEntity<Object> addSubscription(@PathVariable(value = "subscriberId") Long subscriber, @PathVariable(value = "providerId") Long providerId){
+
+            return iRssSubscriptionService.subscribe(subscriber,providerId);
+
+    }
+    @PostMapping
+    @RequestMapping(path = "/unsubscribe/{subscriberId}/{providerId}")
+    @ResponseBody
+    public ResponseEntity<Object> deleteSubscription(@PathVariable(value = "subscriberId") Long subscriber, @PathVariable(value = "providerId") Long providerId){
+
+        return iRssSubscriptionService.unsubscribe(subscriber,providerId);
+
+    }
 
 }

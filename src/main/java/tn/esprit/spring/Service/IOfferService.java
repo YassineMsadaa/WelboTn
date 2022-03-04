@@ -1,14 +1,18 @@
 package tn.esprit.spring.Service;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.spring.Entity.Offer;
 
 import java.util.List;
 
 public interface IOfferService {
-    public Offer ajouterOffer(Offer offer);
-    public void deleteOffer(Long offerId);
-    public List<Offer> getOffers();
-    public Offer modifierOffer(Offer offer);
-    public Offer getOffer(Long offerId);
-    public Offer updateOfferState(Long offerId);
+    public ResponseEntity<Object> ajouterOffer(Offer offer);
+    public ResponseEntity<Object> deleteOffer(Long offerId);
+    public ResponseEntity<Object> getOffers();
+    public ResponseEntity<Object> modifierOffer(Offer offer);
+    public ResponseEntity<Object> getOffer(Long offerId);
+    public ResponseEntity<Object> updateOfferState(Long offerId);
+    public ResponseEntity<Object> getOffersByState(boolean state);
+    public void uploadFile(MultipartFile file);
 }

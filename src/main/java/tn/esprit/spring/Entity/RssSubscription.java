@@ -8,19 +8,15 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-public class Offer implements Serializable {
+public class RssSubscription implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String title;
-    private String description;
-    private Boolean state;
-    private String imageUrl;
     private LocalDateTime createdAt;
-    private LocalDateTime startsAt;
-    private LocalDateTime expiresAt;
-    @ManyToOne
-    private Collaborator collaborator;
 
+    @ManyToOne
+    private BsUser subscriber;
+    @ManyToOne
+    private RssFeedProvider provider;
 }

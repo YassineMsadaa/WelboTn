@@ -1,6 +1,7 @@
 package tn.esprit.spring.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +11,7 @@ import tn.esprit.spring.Entity.NewsfeedPost;
 import tn.esprit.spring.Entity.Tag;
 import tn.esprit.spring.Service.IBannedWordsService;
 import tn.esprit.spring.Service.IBsuserService;
+import tn.esprit.spring.Service.IFileStorageService;
 import tn.esprit.spring.Service.INewsFeedPostService;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class NewsFeedPostController {
     INewsFeedPostService iNewsFeedPostService;
     @Autowired
     IBsuserService iBsuserService;
+    @Autowired
+    IFileStorageService iFileStorageService;
 
 
     @GetMapping
@@ -44,11 +48,24 @@ public class NewsFeedPostController {
     @PostMapping
     @RequestMapping(path = "/new")
     @ResponseBody
-    public ResponseEntity<Object> add(@RequestBody NewsfeedPost newsFeedPost,@RequestParam("image") MultipartFile file){
+    public ResponseEntity<Object> add(@RequestBody NewsfeedPost newsFeedPost){
 
        return iNewsFeedPostService.ajouterNewsfeedPost(newsFeedPost);
     }
-
+    @PostMapping
+    @RequestMapping(path = "/upload/image")
+    @ResponseBody
+    public String addimage(NewsfeedPost newsFeedPost,@RequestBody MultipartFile file){
+        String message ="";
+        try {
+            iFileStorageService.save(file);
+            message = "Uploaded the file successfully: " + file.getOriginalFilename();
+            return message;
+        } catch (Exception e) {
+            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+            return message;
+        }
+    }
     @PutMapping
     @RequestMapping(path = "/edit")
     @ResponseBody
