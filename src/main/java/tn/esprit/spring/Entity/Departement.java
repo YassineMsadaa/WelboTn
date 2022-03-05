@@ -1,7 +1,6 @@
 package tn.esprit.spring.Entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +12,6 @@ public class Departement implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @NotBlank
     @Size(max = 50)
     private String name;
 
