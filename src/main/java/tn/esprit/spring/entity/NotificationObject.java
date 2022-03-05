@@ -26,6 +26,13 @@ public class NotificationObject implements Serializable{
 	
 	@Temporal(TemporalType.DATE)
 	private Date CreationDate;
+	
+	/*public NotificationObject(Long ForumPostId, Long NewsFeedPostId, int type) {
+	    this.ForumPostId = ForumPostId;
+	    this.NewsFeedPostId = NewsFeedPostId;
+	    this.type = type;
+	    //CreationDate
+	}*/
 
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}

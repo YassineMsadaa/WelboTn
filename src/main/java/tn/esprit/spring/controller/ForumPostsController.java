@@ -1,5 +1,6 @@
 package tn.esprit.spring.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class ForumPostsController {
 	@Autowired
 	IForumPostsService ForumPostsService;
 	
-	//http://localhost:8083/PIDEV/ForumPosts/retrieve-all-ForumPost
+	//http://localhost:8083/PIDEV/ForumPosts/retrieve-all-ForumPosts
 	@GetMapping("/retrieve-all-ForumPosts")
 	public List<ForumPosts> getForumPosts() {
 	List<ForumPosts> listForumPosts = ForumPostsService.retrieveAllForumPosts();
@@ -30,10 +31,11 @@ public class ForumPostsController {
 	}
 	
 	//http://localhost:8083/PIDEV/ForumPosts/add-ForumPost
-	@PostMapping("/add-ForumPosts")
+	@PostMapping("/add-ForumPost")
 	@ResponseBody
 	public ForumPosts addForumPost(@RequestBody ForumPosts c)
 	{
+		c.setUploadTime(new Timestamp(System.currentTimeMillis()));
 		ForumPosts ForumPost = ForumPostsService.addForumPost(c);
 		return ForumPost;
 	}
@@ -46,9 +48,16 @@ public class ForumPostsController {
 	}
 	
 	//http://localhost:8083/PIDEV/ForumPosts/modify-ForumPost
-	@PutMapping("/modify-ForumPosts")
+	@PutMapping("/modify-ForumPost")
 	@ResponseBody
 	public ForumPosts modifyForumPost(@RequestBody ForumPosts ForumPost) {
 	return ForumPostsService.updateForumPost(ForumPost);
 	}
+	
+	//http://localhost:8083/PIDEV/ForumPosts/retrieve-ForumPosts-by-category/{idcateg}
+		@GetMapping("/retrieve-ForumPosts-by-category/{idcateg}")
+		public List<ForumPosts> getForumPostsByCategory(@PathVariable("idcateg") Long idcateg) {
+		List<ForumPosts> listForumPosts = ForumPostsService.retrievePostByCateg(idcateg);
+		return listForumPosts;
+		}
 }

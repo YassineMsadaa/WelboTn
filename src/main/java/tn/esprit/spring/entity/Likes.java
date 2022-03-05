@@ -18,10 +18,10 @@ public class Likes implements Serializable{
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id; // Clé primaire
 	
+	private Boolean LikeOrDislike; //1 == like; 0 == dislike
 	private Long UserId;
 	private Long ForumPostId;
 	private Long NewsFeedPostId;
-	private Boolean LikeOrDislike; //1 == like; 0 == dislike
 	
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
@@ -31,6 +31,6 @@ public class Likes implements Serializable{
 	public void setForumPostId(Long forumPostId) {ForumPostId = forumPostId;}
 	public Long getNewsFeedPostId() {return NewsFeedPostId;}
 	public void setNewsFeedPostId(Long newsFeedPostId) {NewsFeedPostId = newsFeedPostId;}
-	public Boolean getLike() {return LikeOrDislike;}
-	public void setLike(Boolean like) {LikeOrDislike = like;}
+	public Boolean getLikeOrDislike() {return LikeOrDislike;}
+	public void setLikeOrDislike(Boolean like) {LikeOrDislike = like;}
 }

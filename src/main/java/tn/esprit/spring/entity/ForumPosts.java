@@ -1,14 +1,14 @@
 package tn.esprit.spring.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Blob;
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 
@@ -22,11 +22,12 @@ public class ForumPosts implements Serializable{
 	
 	private Long UserId;
 	private String Description;
-	private String Attachement;
-	private Long CategorieId;
 	
-	@Temporal(TemporalType.DATE)
-	private Date UploadTime;
+	@Lob
+	private Blob Attachement;
+	
+	private Long CategorieId;
+	private Timestamp UploadTime;
 	
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
@@ -34,10 +35,10 @@ public class ForumPosts implements Serializable{
 	public void setUserId(Long userId) {UserId = userId;}
 	public String getDescription() {return Description;}
 	public void setDescription(String description) {Description = description;}
-	public String getAttachement() {return Attachement;}
-	public void setAttachement(String attachement) {Attachement = attachement;}
-	public Date getUploadTime() {return UploadTime;}
-	public void setUploadTime(Date uploadTime) {UploadTime = uploadTime;}
+	public Blob getAttachement() {return Attachement;}
+	public void setAttachement(Blob attachement) {Attachement = attachement;}
+	public Timestamp getUploadTime() {return UploadTime;}
+	public void setUploadTime(Timestamp uploadTime) {UploadTime = uploadTime;}
 	public Long getCategorieId() {return CategorieId;}
 	public void setCategorieId(Long categorieId) {CategorieId = categorieId;}
 }
