@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.spring.Entity.*;
 import tn.esprit.spring.Entity.Collaborator;
-import tn.esprit.spring.Service.ICollaboratorContactService;
+import tn.esprit.spring.Service.*;
 import tn.esprit.spring.Service.ICollaboratorService;
-import tn.esprit.spring.Service.ICollaboratorService;
-import tn.esprit.spring.Service.IOfferService;
 
 import java.util.List;
 
@@ -23,6 +21,8 @@ public class CollaborationController {
     ICollaboratorContactService iCollaboratorContactService;
     @Autowired
     IOfferService iOfferService;
+    @Autowired
+    IOfferReservationService iOfferReservationService;
 
     //CRUD Collaborator
     @GetMapping
@@ -133,9 +133,51 @@ public class CollaborationController {
     public ResponseEntity<Object> deleteOffer(@PathVariable Long id){
         return iOfferService.deleteOffer(id);
     }
+// reservation management
 
     @PostMapping
-    public void uploadFile(@RequestParam("file") MultipartFile file ){
-
+    @RequestMapping(path = "/reserve/{offerId}/{userId}")
+    @ResponseBody
+    public ResponseEntity<Object> addReservation(@PathVariable(value = "offerId") Long offerId, @PathVariable(value = "userId") Long userId){
+        return iOfferReservationService.addReservation(userId,offerId);
     }
+    @PostMapping
+    @RequestMapping(path = "/remove/reservation/{id}")
+    @ResponseBody
+    public ResponseEntity<Object> removeReservation(@PathVariable(value = "id") Long id){
+        return iOfferReservationService.removeReservation(id);
+    }
+    @PostMapping
+    @RequestMapping(path = "/validate/reservation/{id}")
+    @ResponseBody
+    public ResponseEntity<Object> validateReservation(@PathVariable(value = "id") Long id){
+        return iOfferReservationService.validateReservation(id);
+    }
+    @GetMapping({"/reservations"})
+    public ResponseEntity<Object> getReservations(){
+        return iOfferReservationService.findAllReservations();
+    }
+
+    @GetMapping({"/reservations/user/{userId}"})
+    public ResponseEntity<Object> getReservationsByUser(@PathVariable(value = "userId") Long id){
+        return iOfferReservationService.findReservationsByUser(id);
+    }
+    @GetMapping({"/reservations/offer/{offerId}"})
+    public ResponseEntity<Object> getReservationsByOffer(@PathVariable(value = "offerId") Long id){
+        return iOfferReservationService.findReservationsByOffer(id);
+    }
+    @GetMapping({"/reservation/{id}"})
+    public ResponseEntity<Object> getReservationsById(@PathVariable(value = "id") Long id){
+        return iOfferReservationService.findReservationsById(id);
+    }
+
+    @PostMapping({"/offers/to/excel"})
+    public void getExcel(@RequestBody FilePath path){
+        iOfferService.createExcel(path.getPath()+path.getFilename()+".xlsx");
+    }
+    @PostMapping({"/offers/from/excel"})
+    public void getDataFromExcel(@RequestBody FilePath path){
+        iOfferService.dataFromExcel(path.getPath());
+    }
+
 }

@@ -19,7 +19,9 @@ public class BsUser implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy="postedby", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<NewsfeedPost> newsfeedPosts = new ArrayList<>();
-
+    @JsonIgnore
+    @OneToMany(mappedBy="reservedBy", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<OfferReservation> offerReservations = new ArrayList<>();
     @JsonIgnore
     @OneToMany(mappedBy="commentedby", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Comment> comments = new ArrayList<>();

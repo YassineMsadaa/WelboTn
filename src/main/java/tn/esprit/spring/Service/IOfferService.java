@@ -15,4 +15,6 @@ public interface IOfferService {
     public ResponseEntity<Object> updateOfferState(Long offerId);
     public ResponseEntity<Object> getOffersByState(boolean state);
     public void uploadFile(MultipartFile file);
+    public void createExcel(String saveToPath);
+    public void dataFromExcel(String fileLocation);
 }

@@ -21,6 +21,7 @@ public class CommentService implements ICommentService{
     NewsFeedPostRepository newsFeedPostRepository;
     @Autowired
     IBannedWordsService iBannedWordsService;
+
     @Override
     public ResponseEntity<Object> ajouterComment(Comment comment) {
         if(comment.getContent().length() < 1){
@@ -43,6 +44,9 @@ public class CommentService implements ICommentService{
                 comment.setUpdatedAt(LocalDateTime.now());
                 comment.setCreatedAt(LocalDateTime.now());
                 commentRepository.save(comment);
+            }else{
+                return ResponseHandler.generateResponse("You are not allowed to use "+unallowedWords, HttpStatus.MULTI_STATUS, null);
+
             }
 
         }

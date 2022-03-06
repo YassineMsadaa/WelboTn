@@ -36,4 +36,5 @@ public class BannedWordsService implements IBannedWordsService{
     public BannedWords getBannedWords(Long bannedWordId) {
         return badWordsRepository.findById(bannedWordId).get();
     }
+
 }
