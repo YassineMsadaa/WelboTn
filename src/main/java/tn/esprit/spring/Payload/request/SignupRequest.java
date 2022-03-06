@@ -6,6 +6,7 @@ public class SignupRequest {
 
     private String username;
  
+    private String nid;
 
     private String email;
     
@@ -45,5 +46,13 @@ public class SignupRequest {
     
     public void setRole(Set<String> role) {
       this.role = role;
+    }
+
+    public String getNid() {
+        return nid;
+    }
+
+    public void setNid(String nid) {
+        this.nid = nid;
     }
 }

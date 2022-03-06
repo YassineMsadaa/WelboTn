@@ -18,6 +18,7 @@ import tn.esprit.spring.Payload.request.SignupRequest;
 import tn.esprit.spring.Payload.response.JwtResponse;
 import tn.esprit.spring.Payload.response.MessageResponse;
 import tn.esprit.spring.Repository.IDepratmentRepository;
+import tn.esprit.spring.Repository.IMembresOfCompany;
 import tn.esprit.spring.Repository.IRoleRepository;
 import tn.esprit.spring.Repository.IUserRepository;
 import tn.esprit.spring.Security.jwt.JwtUtils;
@@ -31,11 +32,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -48,6 +51,8 @@ public class AuthController {
 
 	@Autowired
 	IDepratmentRepository depratmentRepository;
+	@Autowired
+	IMembresOfCompany membresOfCompany;
 
 	@Autowired
 	PasswordEncoder encoder;
@@ -81,10 +86,45 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+
+		if (signUpRequest.getUsername().length()<5 && signUpRequest.getUsername().length()>20  ){
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Username must be between 4 and 20 lettres!"));
+		}
+
 		if (userRepository.existsByUserName(signUpRequest.getUsername())) {
 			return ResponseEntity
 					.badRequest()
 					.body(new MessageResponse("Error: Username is already taken!"));
+		}
+
+
+		if (signUpRequest.getNid().length()<=7 && signUpRequest.getNid().length()>12  ) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: National ID must be between 8 and 10 characters!"));
+		}
+
+		if (!(membresOfCompany.existsByNid(signUpRequest.getNid()))) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: National ID isn't registered in our DATABASE!"));
+		}
+
+		if (userRepository.existsByNid(signUpRequest.getNid())) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: National ID is already taken!"));
+		}
+
+		String regexEmail ="^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+		Pattern pattern = Pattern.compile(regexEmail);
+		Matcher matcher = pattern.matcher(signUpRequest.getEmail());
+		if (!matcher.matches()  ) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Email is invalid!"));
 		}
 
 		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
@@ -92,6 +132,8 @@ public class AuthController {
 					.badRequest()
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
+
+
 
 		// Create new user's account
 		User user = new User(signUpRequest.getUsername(), 
@@ -115,9 +157,9 @@ public class AuthController {
 
 					break;
 				case "employee":
-					Role modRole = roleRepository.findByName(ERole.ROLE_EMPLOYEE)
+					Role employeeRole = roleRepository.findByName(ERole.ROLE_EMPLOYEE)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(modRole);
+					roles.add(employeeRole);
 
 					break;
 				}
@@ -125,17 +167,17 @@ public class AuthController {
 		}
 
 		user.setRoles(roles);
-
-		user.setDepartement( depratmentRepository.findById(1).get());
 		String randomCode = RandomString.make(64);
 		user.setVerificationCode(randomCode);
 		user.setEnabled(false);
-		user.setName("yui");
 		userRepository.save(user);
 		userService.sendVerificationEmail(user, getSiteURL(request));
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
+
+
+
 	@GetMapping("/verify")
 	public String verifyUser(@Param("code") String code) {
 		if (userService.verify(code)) {
@@ -146,7 +188,7 @@ public class AuthController {
 	}
 	private String getSiteURL(HttpServletRequest request) {
 		String siteURL = request.getRequestURL().toString();
-		return siteURL.replace(request.getServletPath(), "/api/auth");
+		return siteURL.replace(request.getServletPath(), "/auth");
 	}
 
 

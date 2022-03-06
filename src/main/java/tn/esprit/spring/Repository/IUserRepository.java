@@ -13,6 +13,7 @@ public interface IUserRepository extends CrudRepository<User, Long> {
     public User findUserByName(String name);
     public User findUserByEmail(String email);
     public boolean existsByEmail(String email);
+    Boolean existsByNid(String nid);
     Boolean existsByUserName(String username);
     @Query("SELECT u FROM User u WHERE u.verificationCode = ?1")
     public User findByVerificationCode(String code);

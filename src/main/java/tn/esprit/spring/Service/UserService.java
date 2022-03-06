@@ -41,13 +41,13 @@ public class UserService implements IUserService {
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();
         String fromAddress = email;
-        String senderName = "spring.mail.password";
+        String senderName = "WelboTn";
         String subject = "Please verify your registration";
         String content = "Dear [[name]],<br>"
                 + "Please click the link below to verify your registration:<br>"
                 + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
                 + "Thank you,<br>"
-                + "Your company name.";
+                + "WelboTn.";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -56,7 +56,7 @@ public class UserService implements IUserService {
         helper.setTo(toAddress);
         helper.setSubject(subject);
 
-        content = content.replace("[[name]]", user.getName());
+        content = content.replace("[[name]]", user.getUserName());
         String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
 
         content = content.replace("[[URL]]", verifyURL);
