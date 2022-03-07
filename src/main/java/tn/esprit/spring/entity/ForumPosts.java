@@ -1,7 +1,6 @@
 package tn.esprit.spring.entity;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +23,7 @@ public class ForumPosts implements Serializable{
 	private String Description;
 	
 	@Lob
-	private Blob Attachement;
+	private byte[] Attachement;
 	
 	private Long CategorieId;
 	private Timestamp UploadTime;
@@ -35,8 +34,8 @@ public class ForumPosts implements Serializable{
 	public void setUserId(Long userId) {UserId = userId;}
 	public String getDescription() {return Description;}
 	public void setDescription(String description) {Description = description;}
-	public Blob getAttachement() {return Attachement;}
-	public void setAttachement(Blob attachement) {Attachement = attachement;}
+	public byte[] getAttachement() {return Attachement;}
+	public void setAttachement(byte[] attachement) {Attachement = attachement;}
 	public Timestamp getUploadTime() {return UploadTime;}
 	public void setUploadTime(Timestamp uploadTime) {UploadTime = uploadTime;}
 	public Long getCategorieId() {return CategorieId;}

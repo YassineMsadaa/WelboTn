@@ -14,4 +14,7 @@ public interface ILikesService {
 	void addobjnotif(NotificationObject no);
 	void addNotification(Notifications no);
 	Long findlastobj();
+	Long retrieveForumPostUserId(Long ForumPostId);
+	//Long retrieveNewsFeedPostUserId(Long NewsFeedPostId);
+	//User retrieveUserFromUserId(Long userid);
 }

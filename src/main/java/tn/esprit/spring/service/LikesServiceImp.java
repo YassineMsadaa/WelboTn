@@ -23,14 +23,6 @@ public class LikesServiceImp implements ILikesService{
 
 	@Override
 	public Likes addLike(Likes l) {
-		
-		/*NotificationObject no = new NotificationObject();
-		no.setForumPostId(c.getForumPostId());
-		no.setNewsFeedPostId(c.getNewsFeedPostId());
-		no.setType(2);*/
-		
-		//System.out.println("id from no: "+no.getId()+" | forumpostid from no: "+no.getForumPostId()+" | NewsFeedPostId from no: "+no.getNewsFeedPostId()+" | Type from no: "+no.getType());
-
 		LikesRepository.save(l);
 		 return l;
 	}
@@ -61,10 +53,25 @@ public class LikesServiceImp implements ILikesService{
 		return n;
 	}
 
+	@Override
+	public Long retrieveForumPostUserId(Long ForumPostId) {
+		Long userid = LikesRepository.retrieveForumPostUserId(ForumPostId);
+		return userid;
+	}
+
 	/*
 	@Override
-	public List<NotificationObject> findlastobj() {
-		List<NotificationObject> n = LikesRepository.retrieveLastNotificationObjectId();
-		return n;
-	}*/
+	public Long retrieveNewsFeedPostUserId(Long NewsFeedPostId) {
+		Long userid = LikesRepository.retrieveNewsFeedPostUserId(NewsFeedPostId);
+		return userid;
+	}
+	*/
+	
+	/*
+	@Override
+	public User retrieveUserFromUserId(Long userid) {
+		User user = LikesRepository.retrieveUserFromUserId(userid);
+		return user;
+	}
+	*/
 }

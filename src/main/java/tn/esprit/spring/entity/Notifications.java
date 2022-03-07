@@ -1,6 +1,7 @@
 package tn.esprit.spring.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,12 @@ public class Notifications implements Serializable{
 	private Long NotificationObjectId;
 	private Long UserId;
 	private Boolean Status;
+	
+	public Notifications(Long NotificationObjectId, Long UserId) {
+	    this.NotificationObjectId = NotificationObjectId;
+	    this.UserId = UserId;
+	    this.Status = false;
+	}
 	
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}

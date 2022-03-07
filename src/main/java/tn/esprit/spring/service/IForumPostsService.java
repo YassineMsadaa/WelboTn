@@ -9,6 +9,5 @@ public interface IForumPostsService {
 	ForumPosts  addForumPost(ForumPosts fp);
 	void deleteForumPost(Long id);
 	ForumPosts updateForumPost(ForumPosts fp);
-//findTopByOrderByIdDesc
 	List<ForumPosts> retrievePostByCateg(Long idcateg);
 }

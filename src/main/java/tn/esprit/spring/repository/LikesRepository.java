@@ -24,4 +24,17 @@ public interface LikesRepository extends CrudRepository <Likes,Long>{
 
 	@Query(value = "SELECT id FROM notification_object ORDER BY id DESC LIMIT 1",nativeQuery = true)
 	Long retrieveLastNotificationObjectId();
+	
+	@Query(value = "SELECT user_id FROM forum_posts WHERE id=:idforumpost",nativeQuery = true)
+	Long retrieveForumPostUserId(@Param("idforumpost") Long idforumpost);
+	
+	/*
+	@Query(value = "SELECT user_id FROM forum_posts WHERE id=:idforumpost",nativeQuery = true)
+	Long retrieveNewsFeedPostUserId(@Param("idforumpost") Long idforumpost);
+	*/
+	
+	/*
+	@Query(value = "SELECT * FROM users WHERE id=:userid",nativeQuery = true)
+	User retrieveUserFromUserId(@Param("userid") Long userid);
+	*/
 }

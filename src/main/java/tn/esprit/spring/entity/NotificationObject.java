@@ -1,14 +1,12 @@
 package tn.esprit.spring.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 
@@ -23,16 +21,14 @@ public class NotificationObject implements Serializable{
 	private Long ForumPostId;
 	private Long NewsFeedPostId;
 	private int type; //comment=1; like=2; flagged by admin = 3;
+	private Timestamp CreationDate;
 	
-	@Temporal(TemporalType.DATE)
-	private Date CreationDate;
-	
-	/*public NotificationObject(Long ForumPostId, Long NewsFeedPostId, int type) {
+	public NotificationObject(Long ForumPostId, Long NewsFeedPostId, int type) {
 	    this.ForumPostId = ForumPostId;
 	    this.NewsFeedPostId = NewsFeedPostId;
 	    this.type = type;
-	    //CreationDate
-	}*/
+	    this.CreationDate = new Timestamp(System.currentTimeMillis());
+	}
 
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
@@ -42,6 +38,6 @@ public class NotificationObject implements Serializable{
 	public void setNewsFeedPostId(Long newsFeedPostId) {NewsFeedPostId = newsFeedPostId;}
 	public int getType() {return type;}
 	public void setType(int type) {this.type = type;}
-	public Date getCreationDate() {return CreationDate;}
-	public void setCreationDate(Date creationDate) {CreationDate = creationDate;}
+	public Timestamp getCreationDate() {return CreationDate;}
+	public void setCreationDate(Timestamp creationDate) {CreationDate = creationDate;}
 }
