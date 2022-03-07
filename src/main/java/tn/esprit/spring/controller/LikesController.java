@@ -30,7 +30,6 @@ public class LikesController {
 	
 	NotificationObject NotificationObject;
 	Notifications Notifications;
-	EmailController EmailController;
 	
 	//http://localhost:8083/PIDEV/likes/retrieve-all-likes
 	@GetMapping("/retrieve-all-likes")
