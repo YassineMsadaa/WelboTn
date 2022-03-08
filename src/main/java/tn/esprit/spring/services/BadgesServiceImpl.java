@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import tn.esprit.spring.entities.Badges;
+import tn.esprit.spring.entity.Badges;
 
 public interface BadgesServiceImpl {
 

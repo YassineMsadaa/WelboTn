@@ -20,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tn.esprit.spring.entities.Evaluation;
+
+import tn.esprit.spring.entity.Evaluation;
 import tn.esprit.spring.services.EvaluationServiceImpl;
 @RestController
 @RequestMapping("/evaluation")

@@ -2,7 +2,7 @@ package tn.esprit.spring.services;
 
 import java.util.List;
 
-import tn.esprit.spring.entities.Evaluation;
+import tn.esprit.spring.entity.Evaluation;
 
 public interface EvaluationServiceImpl {
 

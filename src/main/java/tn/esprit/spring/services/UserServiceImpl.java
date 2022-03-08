@@ -2,7 +2,7 @@ package tn.esprit.spring.services;
 
 import java.util.List;
 
-import tn.esprit.spring.entities.User;
+import tn.esprit.spring.entity.User;
 
 public interface UserServiceImpl {
 

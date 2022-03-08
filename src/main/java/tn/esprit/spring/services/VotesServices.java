@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
-import tn.esprit.spring.entities.Votes;
+import tn.esprit.spring.entity.Votes;
 import tn.esprit.spring.reposi.VotesRepository;
 @Service
 @Slf4j

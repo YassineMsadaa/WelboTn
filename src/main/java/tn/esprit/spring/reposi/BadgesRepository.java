@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import tn.esprit.spring.entities.Badges;
+import tn.esprit.spring.entity.Badges;
 
 @Repository
 public interface BadgesRepository extends JpaRepository<Badges, Integer> {

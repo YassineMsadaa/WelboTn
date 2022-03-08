@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tn.esprit.spring.entities.MyConstants;
+import tn.esprit.spring.entity.MyConstants;
 
 @Controller
 public class SimpleEmailExampleController {

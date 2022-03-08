@@ -2,7 +2,7 @@ package tn.esprit.spring.services;
 
 import java.util.List;
 
-import tn.esprit.spring.entities.Votes;
+import tn.esprit.spring.entity.Votes;
 
 public interface VotesServiceImpl {
 

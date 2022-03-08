@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import tn.esprit.spring.entities.MyConstants;
+import tn.esprit.spring.entity.MyConstants;
 
 @Configuration
 public class MailConfig {

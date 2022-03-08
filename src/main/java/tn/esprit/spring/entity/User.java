@@ -1,42 +1,45 @@
-package tn.esprit.spring.entities;
+package tn.esprit.spring.entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tn.esprit.spring.enume.ClassType;
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Evaluation implements Serializable{
+public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String description;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar evaldate;
+	private String role;
+	private String name;
+	private String lastname;
 	private String email;
-	@Enumerated (EnumType.STRING)
-	private ClassType classes;
+	private int departementId;
+	private Date birthDate;
+	private int phoneNum;
+	private String jobTitle;
+	private String profilePic;
 	@JsonIgnore
-	@ManyToMany(cascade= CascadeType.ALL)
-	private List<User> evalUser;
-	}
+	@OneToMany(cascade= CascadeType.ALL, mappedBy="user")
+	private List<Votes> vote;
+	@JsonIgnore
+	@ManyToMany(mappedBy="evalUser", cascade= CascadeType.ALL)
+	private List<Evaluation> evaluation;
+	
+
+}

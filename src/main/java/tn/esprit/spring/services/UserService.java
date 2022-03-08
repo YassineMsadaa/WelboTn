@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import tn.esprit.spring.entities.User;
+import tn.esprit.spring.entity.User;
 import tn.esprit.spring.reposi.UserRepository;
 
 @Service

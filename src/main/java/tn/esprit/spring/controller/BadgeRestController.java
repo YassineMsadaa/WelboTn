@@ -27,7 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tn.esprit.spring.entities.Badges;
+
+import tn.esprit.spring.entity.Badges;
 import tn.esprit.spring.services.BadgesService;
 import tn.esprit.spring.services.BadgesServiceImpl;
 import tn.esprit.spring.upload.ResponseFile;
@@ -101,7 +102,7 @@ public class BadgeRestController {
 				badges.setDescription(description);
 				
 				badgesServiceImpl.addbadge(badges);
-				return new ResponseEntity<>("Badge uploaded with success -" + Namefile, HttpStatus.OK);
+				return new ResponseEntity<>("Badge uploaded with success" + Namefile, HttpStatus.OK);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import lombok.extern.slf4j.Slf4j;
-import tn.esprit.spring.entities.Badges;
+import tn.esprit.spring.entity.Badges;
 import tn.esprit.spring.reposi.BadgesRepository; 
 @Service
 @Slf4j
 public class BadgesService implements BadgesServiceImpl {	
 	@Autowired
 	BadgesRepository badgesRepository;
-
+	//Get:http://localhost:8083/PIDEV/badge/retrieve-All-Badges
 	@Override
 	public List<Badges> retrieveAllBadges() {		
 	List<Badges>badges=(List<Badges>)badgesRepository.findAll();
@@ -27,18 +27,18 @@ public class BadgesService implements BadgesServiceImpl {
 		}
 return badges;
 	}
-
+	//Post:http://localhost:8083/PIDEV/badge/add-Badge
 	@Override
 	public Badges addbadge(Badges b) {
 		return badgesRepository.save(b);
     }
-
+	//Delete:http://localhost:8083/PIDEV/badge/remove-Badges/5
 	@Override
 	public void deleteBadges(Integer id) {
 		badgesRepository.deleteById(id);
 		
 	}
-
+	//Put:http://localhost:8083/PIDEV/badge/modify-Badges
 	@Override
 	public Badges updateBadges(Badges b) {
 		return badgesRepository.save(b);
@@ -50,10 +50,12 @@ return badges;
 		System.out.println("Badges :" + badge);
 		return badge;
 	}
+	
 	@Override
 		 public Badges getFile(Integer id) {
 		 return badgesRepository.findById(id).get();
 		 }
+	
 		 @Override
 		public Stream<Badges> getAllFiles() {
 		return  badgesRepository.findAll().stream();
@@ -64,7 +66,7 @@ return badges;
 		Badges badges = new Badges(file.getContentType(), file.getBytes(), fileName);
 				   return badgesRepository.save(badges);
 				  }
-		
+		//TRI:http://localhost:8083/PIDEV/badge/getAllBadgesBynom
 		@Override
 		public List getAllBadgesBynom() {
 			return badgesRepository.getAllBadgesBynom();
