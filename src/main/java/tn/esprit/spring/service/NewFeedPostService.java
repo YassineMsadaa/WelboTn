@@ -1,4 +1,4 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import tn.esprit.spring.Entity.BannedWords;
-import tn.esprit.spring.Entity.User;
-import tn.esprit.spring.Entity.NewsfeedPost;
-import tn.esprit.spring.Repository.NewsFeedPostRepository;
+import tn.esprit.spring.entity.BannedWords;
+import tn.esprit.spring.entity.User;
+import tn.esprit.spring.entity.NewsfeedPost;
+import tn.esprit.spring.repository.NewsFeedPostRepository;
 import tn.esprit.spring.response.ResponseHandler;
 
 import java.io.File;

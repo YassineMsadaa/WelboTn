@@ -1,11 +1,9 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.spring.Entity.Collaborator;
-import tn.esprit.spring.Entity.Collaborator;
-import tn.esprit.spring.Repository.CollaboratorRepository;
-import tn.esprit.spring.Repository.CollaboratorRepository;
+import tn.esprit.spring.entity.Collaborator;
+import tn.esprit.spring.repository.CollaboratorRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

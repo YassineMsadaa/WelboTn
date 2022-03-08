@@ -1,12 +1,12 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.View;
-import tn.esprit.spring.Entity.RssFeedProvider;
-import tn.esprit.spring.Service.IRssProviderService;
-import tn.esprit.spring.Service.IRssSubscriptionService;
+import tn.esprit.spring.entity.RssFeedProvider;
+import tn.esprit.spring.service.IRssProviderService;
+import tn.esprit.spring.service.IRssSubscriptionService;
 import tn.esprit.spring.component.RssFeedView;
 
 @RestController

@@ -1,4 +1,4 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import com.rometools.rome.feed.synd.SyndEntryImpl;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import tn.esprit.spring.Entity.*;
-import tn.esprit.spring.Repository.BsUserRepository;
-import tn.esprit.spring.Repository.RssProviderRepository;
-import tn.esprit.spring.Repository.RssSubscriptionRepository;
+import tn.esprit.spring.entity.*;
+import tn.esprit.spring.repository.BsUserRepository;
+import tn.esprit.spring.repository.RssProviderRepository;
+import tn.esprit.spring.repository.RssSubscriptionRepository;
 import tn.esprit.spring.response.ResponseHandler;
 
 import java.net.URL;

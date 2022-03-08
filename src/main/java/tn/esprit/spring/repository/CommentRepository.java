@@ -1,11 +1,9 @@
-package tn.esprit.spring.Repository;
+package tn.esprit.spring.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import tn.esprit.spring.Entity.Collaborator;
-import tn.esprit.spring.Entity.CollaboratorContact;
-import tn.esprit.spring.Entity.Comment;
-import tn.esprit.spring.Entity.NewsfeedPost;
+import tn.esprit.spring.entity.Comment;
+import tn.esprit.spring.entity.NewsfeedPost;
 
 import java.util.List;
 

@@ -1,8 +1,6 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import tn.esprit.spring.Entity.Tag;
+import tn.esprit.spring.entity.Tag;
 
 
 import java.util.List;

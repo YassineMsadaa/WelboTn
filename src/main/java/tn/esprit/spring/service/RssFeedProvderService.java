@@ -1,16 +1,13 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import tn.esprit.spring.Entity.BannedWords;
-import tn.esprit.spring.Entity.RssFeedProvider;
-import tn.esprit.spring.Repository.RssProviderRepository;
-import tn.esprit.spring.Repository.TagRepository;
+import tn.esprit.spring.entity.RssFeedProvider;
+import tn.esprit.spring.repository.RssProviderRepository;
 import tn.esprit.spring.response.ResponseHandler;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

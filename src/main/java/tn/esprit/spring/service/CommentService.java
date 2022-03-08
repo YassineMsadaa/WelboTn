@@ -1,13 +1,13 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import tn.esprit.spring.Entity.*;
-import tn.esprit.spring.Entity.Comment;
-import tn.esprit.spring.Repository.CommentRepository;
-import tn.esprit.spring.Repository.NewsFeedPostRepository;
+import tn.esprit.spring.entity.*;
+import tn.esprit.spring.entity.Comment;
+import tn.esprit.spring.repository.CommentRepository;
+import tn.esprit.spring.repository.NewsFeedPostRepository;
 import tn.esprit.spring.response.ResponseHandler;
 
 import java.time.LocalDateTime;

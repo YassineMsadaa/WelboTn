@@ -1,9 +1,9 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.spring.Entity.BannedWords;
-import tn.esprit.spring.Repository.BadWordsRepository;
+import tn.esprit.spring.entity.BannedWords;
+import tn.esprit.spring.repository.BadWordsRepository;
 
 import java.util.List;
 @Service

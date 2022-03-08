@@ -1,14 +1,14 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import tn.esprit.spring.Entity.User;
-import tn.esprit.spring.Entity.NewsfeedPost;
-import tn.esprit.spring.Service.IBsuserService;
-import tn.esprit.spring.Service.IFileStorageService;
-import tn.esprit.spring.Service.INewsFeedPostService;
+import tn.esprit.spring.entity.User;
+import tn.esprit.spring.entity.NewsfeedPost;
+import tn.esprit.spring.service.IBsuserService;
+import tn.esprit.spring.service.IFileStorageService;
+import tn.esprit.spring.service.INewsFeedPostService;
 
 @RestController
 @RequestMapping(path ="/api/newsfeed")

@@ -1,8 +1,7 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.http.ResponseEntity;
-import tn.esprit.spring.Entity.Collaborator;
-import tn.esprit.spring.Entity.CollaboratorContact;
+import tn.esprit.spring.entity.CollaboratorContact;
 
 import java.util.List;
 

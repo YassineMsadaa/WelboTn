@@ -1,10 +1,8 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
-import tn.esprit.spring.Entity.Offer;
-
-import java.util.List;
+import tn.esprit.spring.entity.Offer;
 
 public interface IOfferService {
     public ResponseEntity<Object> ajouterOffer(Offer offer);

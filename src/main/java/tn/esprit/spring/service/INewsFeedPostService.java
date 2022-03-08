@@ -1,8 +1,8 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.http.ResponseEntity;
-import tn.esprit.spring.Entity.User;
-import tn.esprit.spring.Entity.NewsfeedPost;
+import tn.esprit.spring.entity.User;
+import tn.esprit.spring.entity.NewsfeedPost;
 
 import java.util.List;
 

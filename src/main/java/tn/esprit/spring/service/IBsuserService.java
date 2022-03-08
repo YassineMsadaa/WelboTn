@@ -1,6 +1,6 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
-import tn.esprit.spring.Entity.User;
+import tn.esprit.spring.entity.User;
 
 import java.util.List;
 

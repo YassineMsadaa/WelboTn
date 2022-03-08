@@ -1,10 +1,10 @@
-package tn.esprit.spring.Repository;
+package tn.esprit.spring.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import tn.esprit.spring.Entity.User;
-import tn.esprit.spring.Entity.Offer;
-import tn.esprit.spring.Entity.OfferReservation;
+import tn.esprit.spring.entity.User;
+import tn.esprit.spring.entity.Offer;
+import tn.esprit.spring.entity.OfferReservation;
 
 import java.util.List;
 

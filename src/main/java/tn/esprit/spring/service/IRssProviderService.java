@@ -1,9 +1,7 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.http.ResponseEntity;
-import tn.esprit.spring.Entity.RssFeedProvider;
-
-import java.util.List;
+import tn.esprit.spring.entity.RssFeedProvider;
 
 public interface IRssProviderService {
     public ResponseEntity<Object> ajouterRssFeedProvider(RssFeedProvider rssprovider);

@@ -1,12 +1,10 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import tn.esprit.spring.Entity.Tag;
-import tn.esprit.spring.Repository.NewsFeedPostRepository;
-import tn.esprit.spring.Repository.TagRepository;
+import tn.esprit.spring.entity.Tag;
+import tn.esprit.spring.repository.NewsFeedPostRepository;
+import tn.esprit.spring.repository.TagRepository;
 
 import java.util.List;
 

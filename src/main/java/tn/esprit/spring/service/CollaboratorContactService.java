@@ -1,15 +1,14 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import tn.esprit.spring.Entity.Collaborator;
-import tn.esprit.spring.Entity.CollaboratorContact;
-import tn.esprit.spring.Repository.CollaboratorContactRepository;
-import tn.esprit.spring.Repository.CollaboratorRepository;
+import tn.esprit.spring.entity.Collaborator;
+import tn.esprit.spring.entity.CollaboratorContact;
+import tn.esprit.spring.repository.CollaboratorContactRepository;
+import tn.esprit.spring.repository.CollaboratorRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 @Service
 public class CollaboratorContactService implements ICollaboratorContactService{

@@ -1,13 +1,10 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.spring.Entity.CollaboratorContact;
-import tn.esprit.spring.Entity.Comment;
-import tn.esprit.spring.Service.ICommentService;
-
-import java.util.List;
+import tn.esprit.spring.entity.Comment;
+import tn.esprit.spring.service.ICommentService;
 
 @RestController
 @RequestMapping(path ="/api/comments")

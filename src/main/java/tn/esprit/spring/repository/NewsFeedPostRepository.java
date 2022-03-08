@@ -1,9 +1,9 @@
-package tn.esprit.spring.Repository;
+package tn.esprit.spring.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import tn.esprit.spring.Entity.User;
-import tn.esprit.spring.Entity.NewsfeedPost;
+import tn.esprit.spring.entity.User;
+import tn.esprit.spring.entity.NewsfeedPost;
 
 import java.util.List;
 

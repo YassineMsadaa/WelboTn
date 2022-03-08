@@ -1,4 +1,4 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.ss.usermodel.*;
@@ -9,16 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tn.esprit.spring.Entity.Collaborator;
-import tn.esprit.spring.Entity.Offer;
-import tn.esprit.spring.Repository.OfferRepository;
+import tn.esprit.spring.entity.Collaborator;
+import tn.esprit.spring.entity.Offer;
+import tn.esprit.spring.repository.OfferRepository;
 import tn.esprit.spring.response.ResponseHandler;
 import org.apache.commons.io.FileUtils;
 
-import javax.servlet.Servlet;
 import java.io.*;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;

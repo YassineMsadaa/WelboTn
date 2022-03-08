@@ -1,11 +1,7 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
 import org.springframework.http.ResponseEntity;
-import tn.esprit.spring.Entity.CollaboratorContact;
-import tn.esprit.spring.Entity.Comment;
-import tn.esprit.spring.Entity.Tag;
-
-import java.util.List;
+import tn.esprit.spring.entity.Comment;
 
 public interface ICommentService {
     public ResponseEntity<Object> ajouterComment(Comment comment);

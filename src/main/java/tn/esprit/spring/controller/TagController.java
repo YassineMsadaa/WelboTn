@@ -1,13 +1,11 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.spring.Entity.Tag;
-import tn.esprit.spring.Repository.NewsFeedPostRepository;
-import tn.esprit.spring.Repository.TagRepository;
-import tn.esprit.spring.Service.ITagService;
+import tn.esprit.spring.entity.Tag;
+import tn.esprit.spring.service.ITagService;
 
 import java.util.List;
 

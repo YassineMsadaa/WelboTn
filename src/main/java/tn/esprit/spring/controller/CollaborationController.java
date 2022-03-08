@@ -1,14 +1,13 @@
-package tn.esprit.spring.Controller;
+package tn.esprit.spring.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import tn.esprit.spring.Entity.*;
-import tn.esprit.spring.Entity.Collaborator;
-import tn.esprit.spring.Service.*;
-import tn.esprit.spring.Service.ICollaboratorService;
+import tn.esprit.spring.entity.*;
+import tn.esprit.spring.entity.Collaborator;
+import tn.esprit.spring.service.*;
+import tn.esprit.spring.service.ICollaboratorService;
 
 import java.util.List;
 

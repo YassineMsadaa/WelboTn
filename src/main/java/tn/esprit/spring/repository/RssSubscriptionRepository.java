@@ -1,10 +1,10 @@
-package tn.esprit.spring.Repository;
+package tn.esprit.spring.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import tn.esprit.spring.Entity.User;
-import tn.esprit.spring.Entity.RssFeedProvider;
-import tn.esprit.spring.Entity.RssSubscription;
+import tn.esprit.spring.entity.User;
+import tn.esprit.spring.entity.RssFeedProvider;
+import tn.esprit.spring.entity.RssSubscription;
 
 import java.util.List;
 

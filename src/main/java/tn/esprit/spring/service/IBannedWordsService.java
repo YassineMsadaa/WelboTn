@@ -1,7 +1,6 @@
-package tn.esprit.spring.Service;
+package tn.esprit.spring.service;
 
-import tn.esprit.spring.Entity.BannedWords;
-import tn.esprit.spring.Entity.BannedWords;
+import tn.esprit.spring.entity.BannedWords;
 
 import java.util.List;
 

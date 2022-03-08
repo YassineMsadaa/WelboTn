@@ -1,8 +1,8 @@
-package tn.esprit.spring.Repository;
+package tn.esprit.spring.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import tn.esprit.spring.Entity.RssFeedProvider;
+import tn.esprit.spring.entity.RssFeedProvider;
 
 @Repository
 public interface RssProviderRepository extends CrudRepository<RssFeedProvider,Long> {
