@@ -17,7 +17,6 @@ public class Categories implements Serializable{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id; // Clé primaire
-	
 	private String CategName;
 
 	public Long getId() {return id;}

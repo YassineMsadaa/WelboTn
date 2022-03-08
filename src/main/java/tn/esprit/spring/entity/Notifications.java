@@ -2,10 +2,13 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,22 +21,27 @@ public class Notifications implements Serializable{
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id; // Clé primaire
 	
-	private Long NotificationObjectId;
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "NotificationObjectId", referencedColumnName = "id")
+    private NotificationObject NotificationObject;
+
 	private Long UserId;
 	private Boolean Status;
 	
-	public Notifications(Long NotificationObjectId, Long UserId) {
-	    this.NotificationObjectId = NotificationObjectId;
+	public Notifications(){}
+	
+	public Notifications(Long UserId, NotificationObject NotificationObject) {
 	    this.UserId = UserId;
 	    this.Status = false;
+	    this.NotificationObject = NotificationObject;
 	}
 	
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
-	public Long getNotificationObjectId() {return NotificationObjectId;}
-	public void setNotificationObjectId(Long notificationObjectId) {	NotificationObjectId = notificationObjectId;}
 	public Long getUserId() {return UserId;}
 	public void setUserId(Long userId) {UserId = userId;}
 	public Boolean getStatus() {return Status;}
 	public void setStatus(Boolean status) {Status = status;}
+	public NotificationObject getNotificationObject() {return NotificationObject;}
+	public void setNotificationObject(NotificationObject notificationObject) {NotificationObject = notificationObject;}
 }

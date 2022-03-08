@@ -28,7 +28,6 @@ public class CategoriesServiceImp implements ICategoriesService{
 	@Override
 	public void deleteCategorie(Long id) {
 		CategoriesRepository.delete(CategoriesRepository.findById(id).get());
-		
 	}
 
 	@Override

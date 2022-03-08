@@ -23,11 +23,12 @@ public class NotificationObject implements Serializable{
 	private int type; //comment=1; like=2; flagged by admin = 3;
 	private Timestamp CreationDate;
 	
-	public NotificationObject(Long ForumPostId, Long NewsFeedPostId, int type) {
+	public NotificationObject(){}
+	public NotificationObject(Long ForumPostId, Long NewsFeedPostId, int type, Timestamp CreationDate) {
 	    this.ForumPostId = ForumPostId;
 	    this.NewsFeedPostId = NewsFeedPostId;
 	    this.type = type;
-	    this.CreationDate = new Timestamp(System.currentTimeMillis());
+	    this.CreationDate = CreationDate;
 	}
 
 	public Long getId() {return id;}

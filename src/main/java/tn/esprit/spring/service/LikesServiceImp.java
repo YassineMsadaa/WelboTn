@@ -39,12 +39,12 @@ public class LikesServiceImp implements ILikesService{
 
 	@Override
 	public void addobjnotif(NotificationObject no) {
-		LikesRepository.insertnotifobj(no.getForumPostId(), no.getNewsFeedPostId(), no.getType());
+		LikesRepository.insertnotifobj(no.getForumPostId(), no.getNewsFeedPostId(), no.getType(), no.getCreationDate());
 	}
 
 	@Override
 	public void addNotification(Notifications n) {
-		LikesRepository.insertnotification(n.getNotificationObjectId(), n.getStatus(), n.getUserId());
+		LikesRepository.insertnotification(n.getNotificationObject().getId(), n.getStatus(), n.getUserId());
 	}
 
 	@Override
@@ -55,6 +55,7 @@ public class LikesServiceImp implements ILikesService{
 
 	@Override
 	public Long retrieveForumPostUserId(Long ForumPostId) {
+		//YourEntityClassRepositorie.findById(id).get();
 		Long userid = LikesRepository.retrieveForumPostUserId(ForumPostId);
 		return userid;
 	}

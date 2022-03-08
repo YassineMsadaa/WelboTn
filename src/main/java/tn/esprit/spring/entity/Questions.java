@@ -16,7 +16,6 @@ public class Questions implements Serializable{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id; // Clé primaire
-	
 	private String Content;
 	private Long QuestionaireId;
 	

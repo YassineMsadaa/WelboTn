@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entity.Questionnaires;
+import tn.esprit.spring.entity.Questions;
 import tn.esprit.spring.service.IQuestionnairesService;
 
 @RestController
@@ -51,4 +52,11 @@ public class QuestionnairesController {
 	public Questionnaires modifyQuestionnaire(@RequestBody Questionnaires Questionnaire) {
 	return QuestionnaireService.updateQuestionnaire(Questionnaire);
 	}
+	
+	//http://localhost:8083/PIDEV/Questionnaire/retrieve-all-questions-for-questionnaire/{id}
+		@GetMapping("/retrieve-all-questions-for-questionnaire/{id}")
+		public List<Questions> retrieveallQuestionsForQuestionnaire(@PathVariable("id") Long id) {
+		List<Questions> listQuestions = QuestionnaireService.retrieveallQuestionsForQuestionnaire(id);
+		return listQuestions;
+		}
 }

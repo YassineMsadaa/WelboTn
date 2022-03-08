@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import tn.esprit.spring.entity.ForumPosts;
+import tn.esprit.spring.entity.Likes;
 import tn.esprit.spring.service.IForumPostsService;
 
 @RestController
@@ -59,7 +60,6 @@ public class ForumPostsController {
 	public @ResponseBody ResponseEntity<?> createForumPost(@RequestParam("userId") Long UserId, @RequestParam("description") String Description,@RequestParam("categorieId") Long CategorieId,Model model, HttpServletRequest request
 			,final @RequestParam("attachement") MultipartFile file) {
 		try {
-			//String uploadDirectory = System.getProperty("user.dir") + uploadFolder;
 			String uploadDirectory = request.getServletContext().getRealPath(FILE_DIRECTORY);
 			String fileName = file.getOriginalFilename();
 			String filePath = Paths.get("C:\\Products\\sts-bundle\\workspace-sts\\PIDEV\\pide\\src\\main\\resources\\image", fileName).toString();
@@ -116,5 +116,12 @@ public class ForumPostsController {
 		public List<ForumPosts> getForumPostsByCategory(@PathVariable("idcateg") Long idcateg) {
 		List<ForumPosts> listForumPosts = ForumPostsService.retrievePostByCateg(idcateg);
 		return listForumPosts;
+		}
+		
+		//http://localhost:8083/PIDEV/ForumPosts/retrieve-all-ForumPostLikes/{forumpostid}
+		@GetMapping("/retrieve-all-ForumPostLikes/{forumpostid}")
+		public List<Likes> getForumPostLikes(@PathVariable("forumpostid") Long forumpostid) {
+		List<Likes> PostLikes = ForumPostsService.retrievePostLikes(forumpostid);
+		return PostLikes;
 		}
 }

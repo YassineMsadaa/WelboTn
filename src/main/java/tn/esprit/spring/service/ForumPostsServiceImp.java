@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entity.ForumPosts;
+import tn.esprit.spring.entity.Likes;
 import tn.esprit.spring.repository.ForumPostsRepository;
 
 @Service
@@ -39,6 +40,12 @@ public class ForumPostsServiceImp implements IForumPostsService{
 	public List<ForumPosts> retrievePostByCateg(Long idcateg) {
 		List<ForumPosts> ForumPosts = ForumPostsRepository.retrievePostsByCategorie(idcateg);
 		return ForumPosts;
+	}
+
+	@Override
+	public List<Likes> retrievePostLikes(Long forumpostid) {
+		List<Likes> PostLikes = ForumPostsRepository.retrievePostLikes(forumpostid);
+		return PostLikes;
 	}
 
 }

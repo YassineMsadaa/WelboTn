@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entity.Questionnaires;
+import tn.esprit.spring.entity.Questions;
 import tn.esprit.spring.repository.QuestionnairesRepository;
 
 @Service
@@ -33,6 +34,12 @@ public class QuestionnairesServiceImp implements IQuestionnairesService{
 	@Override
 	public Questionnaires updateQuestionnaire(Questionnaires q) {
 		return QuestionnairesRepository.save(q);
+	}
+
+	@Override
+	public List<Questions> retrieveallQuestionsForQuestionnaire(Long id) {
+		List<Questions> Questions = (List<Questions>) QuestionnairesRepository.retrieveallQuestionsForQuestionnaire(id);
+		return Questions;
 	}
 
 }

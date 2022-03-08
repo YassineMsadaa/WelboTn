@@ -1,5 +1,6 @@
 package tn.esprit.spring.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,22 +66,24 @@ public class LikesController {
 	{
 		Likes Like = LikesService.addLike(L);
 		
-		NotificationObject no = new NotificationObject(L.getForumPostId(),L.getNewsFeedPostId(),2);
+		NotificationObject no = new NotificationObject(L.getForumPost().getId(),L.getNewsFeedPostId(), 2, new Timestamp(System.currentTimeMillis()));
 		
 		LikesService.addobjnotif(no);
-	
 		
-		if(L.getForumPostId()!=null){
-			Notifications N = new Notifications(LikesService.retrieveForumPostUserId(L.getForumPostId()),LikesService.findlastobj());
+		no.setId(LikesService.findlastobj());
+		
+		if(L.getForumPost().getId()!=null){
+			Notifications N = new Notifications(LikesService.retrieveForumPostUserId(L.getForumPost().getId()),no);
+			System.out.println(no.toString());
 			LikesService.addNotification(N);
 		}
 		else if(L.getNewsFeedPostId()!=null){
-			Notifications N = new Notifications(LikesService.retrieveForumPostUserId(L.getNewsFeedPostId()),LikesService.findlastobj());
+			Notifications N = new Notifications(LikesService.retrieveForumPostUserId(L.getNewsFeedPostId()),no);
 			//Notifications N = new Notifications(LikesService.retrieveNewsFeedPostUserId(L.getNewsFeedPostId()),LikesService.findlastobj());
 			LikesService.addNotification(N);
 		}
 		
-		LikeNotification("esm moula lpost","esm li 7at like");
+		//LikeNotification("esm moula lpost","esm li 7at like");
 		
 		return Like;
 	}
