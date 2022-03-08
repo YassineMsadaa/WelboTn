@@ -62,31 +62,50 @@ public class AuthController {
 
 	@Autowired
 	UserService userService;
-
+/////////////////////////////////////////// signin /////////////////////////////////////////////////
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+		try{
+			Authentication authentication = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		String jwt = jwtUtils.generateJwtToken(authentication);
-		
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		List<String> roles = userDetails.getAuthorities().stream()
-				.map(item -> item.getAuthority())
-				.collect(Collectors.toList());
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			String jwt = jwtUtils.generateJwtToken(authentication);
+
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			List<String> roles = userDetails.getAuthorities().stream()
+					.map(item -> item.getAuthority())
+					.collect(Collectors.toList());
+
+		if(userDetails.isBlocked()){
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse(" This account is blocked!"));
+		}else if(!(userDetails.getVerificationCode()==null)) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse(" Verify your email to access!"));
+		}else{
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
 												 userDetails.getEmail(), 
-												 roles));
+												 roles));}
+		}catch(Exception e){
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse(" Bad credentials!"));
+		}
+
 	}
+
+////////////////////////////////////////////// signup /////////////////////////////////////
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-
+		////////////////// userName input control
 		if (signUpRequest.getUsername().length()<5 && signUpRequest.getUsername().length()>20  ){
 			return ResponseEntity
 					.badRequest()
@@ -99,17 +118,11 @@ public class AuthController {
 					.body(new MessageResponse("Error: Username is already taken!"));
 		}
 
-
+		////////////////// Nid input control
 		if (signUpRequest.getNid().length()<=7 && signUpRequest.getNid().length()>12  ) {
 			return ResponseEntity
 					.badRequest()
 					.body(new MessageResponse("Error: National ID must be between 8 and 10 characters!"));
-		}
-
-		if (!(membresOfCompany.existsByNid(signUpRequest.getNid()))) {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: National ID isn't registered in our DATABASE!"));
 		}
 
 		if (userRepository.existsByNid(signUpRequest.getNid())) {
@@ -118,6 +131,13 @@ public class AuthController {
 					.body(new MessageResponse("Error: National ID is already taken!"));
 		}
 
+		/////////////////// Nid exists in MembresOfCompany
+		if (!(membresOfCompany.existsByNid(signUpRequest.getNid()))) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: National ID isn't registered in our DATABASE!"));
+		}
+		/////////////////// email input control
 		String regexEmail ="^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 		Pattern pattern = Pattern.compile(regexEmail);
 		Matcher matcher = pattern.matcher(signUpRequest.getEmail());
@@ -132,17 +152,12 @@ public class AuthController {
 					.badRequest()
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
-
-
-
-		// Create new user's account
 		User user = new User(signUpRequest.getUsername(), 
 							 signUpRequest.getEmail(),
 							 encoder.encode(signUpRequest.getPassword()));
-
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
-
+		/////////////////// role input control
 		if (strRoles == null) {
 			Role userRole = roleRepository.findByName(ERole.ROLE_EMPLOYEE)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -160,24 +175,44 @@ public class AuthController {
 					Role employeeRole = roleRepository.findByName(ERole.ROLE_EMPLOYEE)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 					roles.add(employeeRole);
-
 					break;
 				}
 			});
 		}
-
+		/////////////////// save Employee with given input
 		user.setRoles(roles);
 		String randomCode = RandomString.make(64);
+		user.setNid(signUpRequest.getNid());
 		user.setVerificationCode(randomCode);
-		user.setEnabled(false);
+		user.setBlocked(false);
 		userRepository.save(user);
-		userService.sendVerificationEmail(user, getSiteURL(request));
 
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		/////////////////// send verification mail
+		userService.sendVerificationEmail(user, userService.getSiteURL(request));
+
+		return ResponseEntity.ok(new MessageResponse("User registered successfully, check your email to verify your account!"));
+	}
+
+	@PostMapping("/sendChangePasswordEmail")
+	public ResponseEntity<?> sendChangePasswordEmail(@RequestParam("userId")Long id,HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+
+		User user= userRepository.findById(id).get();
+		userService.sendChangePasswordEmail(user, userService.getSiteURL(request));
+
+		return ResponseEntity.ok(new MessageResponse("Email sent successfully, check your email to change your password!"));
+	}
+	@PostMapping("/changepassword/userId")
+	public ResponseEntity<?> changePassword(@Param("id") Long id,@RequestParam("password") String password) {
+
+		User user=userRepository.findById(id).get();
+		user.setPassword(encoder.encode(password));
+		userRepository.save(user);
+
+		return ResponseEntity.ok(new MessageResponse("your password is changed successfully!"));
 	}
 
 
-
+/////////////////// verify Employee with email/////////////////////////////////////
 	@GetMapping("/verify")
 	public String verifyUser(@Param("code") String code) {
 		if (userService.verify(code)) {
@@ -186,10 +221,7 @@ public class AuthController {
 			return "verify_fail";
 		}
 	}
-	private String getSiteURL(HttpServletRequest request) {
-		String siteURL = request.getRequestURL().toString();
-		return siteURL.replace(request.getServletPath(), "/auth");
-	}
+
 
 
 }

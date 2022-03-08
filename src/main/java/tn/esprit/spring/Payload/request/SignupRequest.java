@@ -5,17 +5,12 @@ import java.util.Set;
 public class SignupRequest {
 
     private String username;
- 
     private String nid;
-
     private String email;
-    
     private Set<String> role;
-    
-
     private String password;
 
-  
+
     public String getUsername() {
         return username;
     }
@@ -48,11 +43,7 @@ public class SignupRequest {
       this.role = role;
     }
 
-    public String getNid() {
-        return nid;
-    }
+    public String getNid() {return nid;}
 
-    public void setNid(String nid) {
-        this.nid = nid;
-    }
+    public void setNid(String nid) {this.nid = nid;}
 }

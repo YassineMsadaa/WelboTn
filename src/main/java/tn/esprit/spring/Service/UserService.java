@@ -10,6 +10,7 @@ import tn.esprit.spring.Repository.IUserRepository;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -26,17 +27,15 @@ public class UserService implements IUserService {
     public boolean verify(String verificationCode) {
         User user = IUserRepository.findByVerificationCode(verificationCode);
 
-        if (user == null || user.isEnabled()) {
+        if (user == null) {
             return false;
         } else {
             user.setVerificationCode(null);
-            user.setEnabled(true);
             IUserRepository.save(user);
-
             return true;
         }
-
     }
+
     public void sendVerificationEmail(User user, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();
@@ -66,6 +65,41 @@ public class UserService implements IUserService {
         mailSender.send(message);
 
     }
+
+    public String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "/auth");
+    }
+    public void sendChangePasswordEmail(User user, String siteURL)
+            throws MessagingException, UnsupportedEncodingException {
+        String toAddress = user.getEmail();
+        String fromAddress = email;
+        String senderName = "WelboTn";
+        String subject = "Change password";
+        String content = "Dear [[name]],<br>"
+                + "Please click the link below to your password:<br>"
+                + "<h3><a href=\"[[URL]]\" target=\"_self\">CHANGE</a></h3>"
+                + "Thank you,<br>"
+                + "WelboTn.";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(toAddress);
+        helper.setSubject(subject);
+
+        content = content.replace("[[name]]", user.getUserName());
+        String changePasswordURL = siteURL + "/changepassword/userId?id=" + user.getId();
+
+        content = content.replace("[[URL]]", changePasswordURL);
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
+
+    }
+
     @Override
     public User addUser(User user) {
         IUserRepository.save(user);

@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.spring.Entity.MembersOfCompany;
 import tn.esprit.spring.Payload.response.MessageResponse;
-import tn.esprit.spring.Service.CSVService;
+import tn.esprit.spring.Service.MOCService;
 import tn.esprit.spring.helper.CSVHelper;
 
 import java.util.List;
 
 
 @Controller
-@RequestMapping("/csv")
+@RequestMapping("admin")
 public class CSVController {
 
   @Autowired
-  CSVService fileService;
+  MOCService fileService;
 
-  @PostMapping("/upload")
+  @PostMapping("/csv/upload")
   public ResponseEntity<MessageResponse> uploadFile(@RequestParam("file") MultipartFile file) {
     String message;
 
@@ -46,7 +46,7 @@ public class CSVController {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse(message));
   }
 
-  @GetMapping("/MOCs")
+  @GetMapping("/csv/MOCs")
   public ResponseEntity<List<MembersOfCompany>> getAllMembersOfCompanys() {
     try {
       List<MembersOfCompany> tutorials = fileService.getAllTutorials();
@@ -61,7 +61,7 @@ public class CSVController {
     }
   }
 
-  @GetMapping("/download")
+  @GetMapping("/csv/download")
   public ResponseEntity<Resource> getFile() {
     String filename = "membres of company.csv";
     InputStreamResource file = new InputStreamResource(fileService.load());

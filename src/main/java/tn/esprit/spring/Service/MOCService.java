@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class CSVService {
+public class MOCService {
   @Autowired
   IMembresOfCompany membresOfCompany;
 

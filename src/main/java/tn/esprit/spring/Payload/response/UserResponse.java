@@ -1,24 +1,12 @@
-package tn.esprit.spring.Entity;
+package tn.esprit.spring.Payload.response;
 
+import tn.esprit.spring.Entity.Departement;
+import tn.esprit.spring.Entity.Role;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(	name = "user",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "nid"),
-                @UniqueConstraint(columnNames = "email"),
-                @UniqueConstraint(columnNames = "userName")
-        })
-
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserResponse {
     private Long id;
     private String userName;
     private String name;
@@ -31,30 +19,12 @@ public class User implements Serializable {
     private Timestamp birthDate;
     private String cellPhoneNumber;
     private String homePhoneNumber;
-    @Lob
     private byte[] profilePicture;
     private String verificationCode ;
-    @ManyToMany(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
-    @ManyToOne
+    private Set<Role> roles;
     private Departement departement;
 
-
-
-    public User(String username, String email, String password) {
-        this.userName = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User() {
-
-    }
-
-    public User(Long id, String userName, String name, String lastName, String nid, String email, String password,  boolean isBlocked, Timestamp birthDate, String cellPhoneNumber, String homePhoneNumber, byte[] profilePicture, String verificationCode, Set<Role> roles, Departement departement) {
+    public UserResponse(Long id, String userName, String name, String lastName, String nid, String email, String password, boolean isBlocked, Timestamp birthDate, String cellPhoneNumber, String homePhoneNumber, byte[] profilePicture, String verificationCode, Set<Role> roles, Departement departement) {
         this.id = id;
         this.userName = userName;
         this.name = name;
@@ -75,7 +45,6 @@ public class User implements Serializable {
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
@@ -137,7 +106,7 @@ public class User implements Serializable {
         isBlocked = blocked;
     }
 
-    public Date getBirthDate() {
+    public Timestamp getBirthDate() {
         return birthDate;
     }
 
@@ -169,6 +138,14 @@ public class User implements Serializable {
         this.profilePicture = profilePicture;
     }
 
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -183,13 +160,5 @@ public class User implements Serializable {
 
     public void setDepartement(Departement departement) {
         this.departement = departement;
-    }
-
-    public String getVerificationCode() {
-        return verificationCode;
-    }
-
-    public void setVerificationCode(String verificationCode) {
-        this.verificationCode = verificationCode;
     }
 }

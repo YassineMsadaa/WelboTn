@@ -14,22 +14,24 @@ public class UserDetails implements org.springframework.security.core.userdetail
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-
 	private String username;
-
 	private String email;
-
+	private boolean isBlocked;
+	private String verificationCode;
 	@JsonIgnore
 	private String password;
-
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetails(Long id, String username, String password,
+	public UserDetails(Long id, String username, String password, String email, boolean isBlocked,String verificationCode,
 					   Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
+		this.email = email;
 		this.password = password;
+		this.isBlocked = isBlocked;
 		this.authorities = authorities;
+		this.verificationCode = verificationCode;
+
 	}
 
 	public static UserDetails build(User user) {
@@ -40,7 +42,10 @@ public class UserDetails implements org.springframework.security.core.userdetail
 		return new UserDetails(
 				user.getId(), 
 				user.getUserName(),
-				user.getPassword(), 
+				user.getPassword(),
+				user.getEmail(),
+				user.isBlocked(),
+				user.getVerificationCode(),
 				authorities);
 	}
 
@@ -67,6 +72,14 @@ public class UserDetails implements org.springframework.security.core.userdetail
 		return username;
 	}
 
+	public boolean isBlocked() {
+		return isBlocked;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -86,6 +99,8 @@ public class UserDetails implements org.springframework.security.core.userdetail
 	public boolean isEnabled() {
 		return true;
 	}
+
+
 
 	@Override
 	public boolean equals(Object o) {
