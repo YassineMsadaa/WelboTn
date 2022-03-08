@@ -31,7 +31,7 @@ public class RssSubscriptionService implements IRssSubscriptionService{
     public ResponseEntity<Object> subscribe(Long userId, Long providerId) {
         try{
             RssSubscription subscription= new RssSubscription();
-            BsUser subscriber = bsUserRepository.findById(userId).get();
+            User subscriber = bsUserRepository.findById(userId).get();
             RssFeedProvider provider = rssProviderRepository.findById(providerId).get();
             if(rssProviderRepository.findById(providerId).isEmpty()){
                 return ResponseHandler.generateResponse("provider inexistant!", HttpStatus.MULTI_STATUS, null);
@@ -60,7 +60,7 @@ public class RssSubscriptionService implements IRssSubscriptionService{
     public ResponseEntity<Object> unsubscribe(Long userId, Long providerId) {
         try{
             RssSubscription subscription= new RssSubscription();
-            BsUser subscriber = bsUserRepository.findById(userId).get();
+            User subscriber = bsUserRepository.findById(userId).get();
             RssFeedProvider provider = rssProviderRepository.findById(providerId).get();
             if(rssProviderRepository.findById(providerId).isEmpty()){
                 return ResponseHandler.generateResponse("provider inexistant!", HttpStatus.MULTI_STATUS, null);
@@ -117,7 +117,7 @@ public class RssSubscriptionService implements IRssSubscriptionService{
     public ResponseEntity<Object> rssByUser(Long userId) {
         List<RssFeedProvider> providers = new ArrayList<>();
           List mylist = new ArrayList<>();
-        BsUser subscriber = bsUserRepository.findById(userId).get();
+        User subscriber = bsUserRepository.findById(userId).get();
         List<RssSubscription> subscriptions = rssSubscriptionRepository.findRssSubscriptionBySubscriber(subscriber);
         for (RssSubscription rssSubscription : subscriptions){
             providers.add(rssSubscription.getProvider());

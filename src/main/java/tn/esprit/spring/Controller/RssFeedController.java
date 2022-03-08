@@ -1,31 +1,13 @@
 package tn.esprit.spring.Controller;
 
-import com.rometools.rome.feed.synd.SyndEntryImpl;
-import com.rometools.rome.feed.synd.SyndFeed;
-import com.rometools.rome.io.FeedException;
-import com.rometools.rome.io.SyndFeedInput;
-import com.rometools.rome.io.XmlReader;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.View;
-import tn.esprit.spring.Entity.BsUser;
-import tn.esprit.spring.Entity.NewsfeedPost;
 import tn.esprit.spring.Entity.RssFeedProvider;
-import tn.esprit.spring.Entity.RssSubscription;
 import tn.esprit.spring.Service.IRssProviderService;
 import tn.esprit.spring.Service.IRssSubscriptionService;
 import tn.esprit.spring.component.RssFeedView;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping(path ="/api/RSS")

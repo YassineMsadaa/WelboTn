@@ -18,11 +18,10 @@ public class NewsfeedPost implements Serializable {
 
     private String content;
     @ManyToOne
-    private BsUser postedby;
+    private User postedby;
 
 
     private String image;
-    private String imageUrl;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "newsfeedpostsTags",

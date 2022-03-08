@@ -16,7 +16,7 @@ public class RssSubscription implements Serializable {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    private BsUser subscriber;
+    private User subscriber;
     @ManyToOne
     private RssFeedProvider provider;
 }

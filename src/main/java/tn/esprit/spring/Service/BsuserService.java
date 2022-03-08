@@ -2,8 +2,7 @@ package tn.esprit.spring.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.spring.Entity.BsUser;
-import tn.esprit.spring.Repository.NewsFeedPostRepository;
+import tn.esprit.spring.Entity.User;
 import tn.esprit.spring.Repository.BsUserRepository;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class BsuserService implements IBsuserService{
 
 
     @Override
-    public BsUser ajouterBsUser(BsUser bsuser) {
+    public User ajouterBsUser(User bsuser) {
         bsuserRepository.save(bsuser);
         return bsuser;
     }
@@ -29,19 +28,19 @@ public class BsuserService implements IBsuserService{
     }
 
     @Override
-    public List<BsUser> getBsUsers() {
+    public List<User> getBsUsers() {
 
-        return (List<BsUser>) bsuserRepository.findAll();
+        return (List<User>) bsuserRepository.findAll();
     }
 
     @Override
-    public BsUser modifierBsUser( BsUser bsuser) {
+    public User modifierBsUser(User bsuser) {
         bsuserRepository.save(bsuser);
         return bsuser;
     }
 
     @Override
-    public BsUser getBsUser(Long bsuserId) {
+    public User getBsUser(Long bsuserId) {
         return bsuserRepository.findById(bsuserId).get();
     }
 

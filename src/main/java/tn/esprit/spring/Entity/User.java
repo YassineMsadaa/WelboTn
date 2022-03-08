@@ -9,13 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 @Data
 @Entity
-public class BsUser implements Serializable {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne
-    private RssSubscription subscription;
+
     @JsonIgnore
     @OneToMany(mappedBy="postedby", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<NewsfeedPost> newsfeedPosts = new ArrayList<>();

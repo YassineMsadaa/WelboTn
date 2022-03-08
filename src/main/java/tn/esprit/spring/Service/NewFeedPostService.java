@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.Entity.BannedWords;
-import tn.esprit.spring.Entity.BsUser;
+import tn.esprit.spring.Entity.User;
 import tn.esprit.spring.Entity.NewsfeedPost;
 import tn.esprit.spring.Repository.NewsFeedPostRepository;
 import tn.esprit.spring.response.ResponseHandler;
@@ -150,7 +150,7 @@ public class NewFeedPostService implements INewsFeedPostService {
     }
 
     @Override
-    public ResponseEntity<Object> getPostsByPostedBy(BsUser postedBy) {
+    public ResponseEntity<Object> getPostsByPostedBy(User postedBy) {
         try{
 
             return ResponseHandler.generateResponse("Success", HttpStatus.OK, newsFeedPostRepository.findByPostedby(postedBy));

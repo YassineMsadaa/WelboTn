@@ -193,6 +193,7 @@ public class OfferService implements IOfferService{
 
     //This data needs to be written (Object[])
     Map<String, Object[]> data = new TreeMap<String, Object[]>();
+
    data.put("1", new Object[] {"ID", "COLLABORATOR","TITLE", "DESCRIPTION","CREATED AT","STARTS AT","EXPRES AT","QUANTITY","STATE"});
     for(Offer o : offers ){
         data.put(String.valueOf(i), new Object[] {o.getId(), o.getCollaborator().getCompany(),o.getTitle(), o.getDescription(),o.getCreatedAt().format(formatter),o.getStartsAt().format(formatter),o.getExpiresAt().format(formatter),o.getQuantity(),o.getState()});
@@ -205,12 +206,15 @@ public class OfferService implements IOfferService{
     int rownum = 0;
     for (String key : keyset)
     {
+
         Row row = sheet.createRow(rownum++);
         Object [] objArr = data.get(key);
         int cellnum = 0;
         for (Object obj : objArr)
         {
             Cell cell = row.createCell(cellnum++);
+            CellStyle style = workbook.createCellStyle();
+
             if(obj instanceof String)
                 cell.setCellValue((String)obj);
             else if(obj instanceof Integer)
@@ -219,8 +223,17 @@ public class OfferService implements IOfferService{
                 cell.setCellValue((Long)obj);
             else if(obj instanceof LocalDateTime)
                 cell.setCellValue((LocalDateTime) obj);
-            else if(obj instanceof Boolean)
+            else if(obj instanceof Boolean){
                 cell.setCellValue((Boolean) obj);
+                if (obj.equals(true)){
+                    style.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
+                }else {
+                    style.setFillForegroundColor(IndexedColors.RED1.getIndex());
+                }
+
+                style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                cell.setCellStyle(style);
+            }
         }
     }
     try
@@ -240,7 +253,7 @@ public class OfferService implements IOfferService{
     public void dataFromExcel(String fileLocation) {
         try
         {
-Boolean isSetId = false;
+        Boolean isSetId = false;
             Offer offer = new Offer();
             offer.setId(null);
             Collaborator collaborator = new Collaborator();

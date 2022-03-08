@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 @Data
 @Entity
@@ -19,7 +17,7 @@ public class Comment {
 
 
     @ManyToOne
-    private BsUser commentedby;
+    private User commentedby;
 
     @ManyToOne
     private NewsfeedPost newsfeedPost;

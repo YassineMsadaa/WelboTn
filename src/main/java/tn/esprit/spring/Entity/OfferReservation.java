@@ -17,7 +17,7 @@ public class OfferReservation implements Serializable {
     private LocalDateTime validatedAt;
 
     @ManyToOne
-    BsUser reservedBy;
+    User reservedBy;
     @ManyToOne
     Offer offer;
     Boolean state;

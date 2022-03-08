@@ -1,14 +1,13 @@
 package tn.esprit.spring.Service;
 
-import org.springframework.http.ResponseEntity;
-import tn.esprit.spring.Entity.BsUser;
+import tn.esprit.spring.Entity.User;
 
 import java.util.List;
 
 public interface IBsuserService {
-    public BsUser ajouterBsUser(BsUser bsuser);
+    public User ajouterBsUser(User bsuser);
     public void deleteBsUser(Long bsuserId);
-    public List<BsUser> getBsUsers();
-    public BsUser modifierBsUser(BsUser bsuser);
-    public BsUser getBsUser(Long bsuserId);
+    public List<User> getBsUsers();
+    public User modifierBsUser(User bsuser);
+    public User getBsUser(Long bsuserId);
 }

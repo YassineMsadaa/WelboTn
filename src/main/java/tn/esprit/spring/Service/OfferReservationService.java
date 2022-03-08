@@ -25,7 +25,7 @@ public class OfferReservationService implements IOfferReservationService{
     public ResponseEntity<Object> addReservation(Long userId, Long offerId) {
         try{
             OfferReservation offerReservation = new OfferReservation();
-            BsUser user = bsUserRepository.findById(userId).get();
+            User user = bsUserRepository.findById(userId).get();
             Offer offer = offerRepository.findById(offerId).get();
            if (user.getId() == null){
                return ResponseHandler.generateResponse("user inexistant!", HttpStatus.MULTI_STATUS, user);
@@ -100,7 +100,7 @@ public class OfferReservationService implements IOfferReservationService{
     @Override
     public ResponseEntity<Object> findReservationsByUser(Long userId) {
         try{
-            BsUser user = bsUserRepository.findById(userId).get();
+            User user = bsUserRepository.findById(userId).get();
             return ResponseHandler.generateResponse("fetch reservations success", HttpStatus.MULTI_STATUS, offerReservationRepository.findAllByReservedBy(user));
         }catch (Exception e){
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
