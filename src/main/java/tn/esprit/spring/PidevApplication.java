@@ -9,4 +9,9 @@ public class PidevApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PidevApplication.class, args);
 	}
+<<<<<<< HEAD
 }
+=======
+
+}
+>>>>>>> master
