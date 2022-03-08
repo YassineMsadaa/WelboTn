@@ -1,10 +1,10 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -32,9 +32,8 @@ public class Evaluation implements Serializable{
 	private int id;
 	private String description;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(updatable=false)
-	private Date evaldate;
-	private String Email;
+	private Calendar evaldate;
+	private String email;
 	@Enumerated (EnumType.STRING)
 	private ClassType classes;
 	@JsonIgnore

@@ -1,20 +1,16 @@
 package tn.esprit.spring.services;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import lombok.extern.slf4j.Slf4j;
 import tn.esprit.spring.entities.Votes;
 import tn.esprit.spring.reposi.VotesRepository;
-
 @Service
 @Slf4j
 public class VotesServices implements VotesServiceImpl {
 	@Autowired
 	VotesRepository votesRepository;
-
 	@Override
 	public List<Votes> retrieveAllVotes() {
 		List<Votes>votes=(List<Votes>)votesRepository.findAll();
@@ -24,9 +20,8 @@ public class VotesServices implements VotesServiceImpl {
 		}
     return votes;
 	}
-
 	@Override
-	public Votes addVotes(Votes v) {
+	public Votes addvote(Votes v) {
 		return votesRepository.save(v);
 	}
 
@@ -47,9 +42,4 @@ public class VotesServices implements VotesServiceImpl {
 		System.out.println("Votes :" + vote);
 		return vote;
 	}
-	
-
-
-
-
 }

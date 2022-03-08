@@ -4,15 +4,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.hibernate.annotations.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.mysql.cj.util.StringUtils;
-
 import lombok.extern.slf4j.Slf4j;
 import tn.esprit.spring.entities.Badges;
-import tn.esprit.spring.reposi.BadgesRepository;
+import tn.esprit.spring.reposi.BadgesRepository; 
 @Service
 @Slf4j
 public class BadgesService implements BadgesServiceImpl {	
@@ -32,7 +31,7 @@ return badges;
 	@Override
 	public Badges addbadge(Badges b) {
 		return badgesRepository.save(b);
-	}
+    }
 
 	@Override
 	public void deleteBadges(Integer id) {
@@ -46,23 +45,31 @@ return badges;
 	}
 
 	@Override
-	public Badges retrieveBadges(Integer id) {
+	    public Badges retrieveBadges(Integer id) {
 		Badges badge = badgesRepository.findById(id).orElse(null);
 		System.out.println("Badges :" + badge);
 		return badge;
 	}
-	 public Badges store(MultipartFile file) throws IOException {
-		    String FileName = StringUtils.cleanPath(file.getOriginalFilename());
-		    Badges badges = new Badges(FileName, file.getContentType(), file.getBytes());
-		    return badgesRepository.save(badges);
-		  }
-		  public Badges getFile(String id) {
-		    return BadgesRepository.findById(Integer).get();
-		  }
-		  
-		  public Stream<Badges> getAllFiles() {
-		    return badgesRepository.findAll().stream();
-		  }
+	@Override
+		 public Badges getFile(Integer id) {
+		 return badgesRepository.findById(id).get();
+		 }
+		 @Override
+		public Stream<Badges> getAllFiles() {
+		return  badgesRepository.findAll().stream();
+		}
+		@Override
+	public Badges store(MultipartFile file) throws IOException {
+	String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		Badges badges = new Badges(file.getContentType(), file.getBytes(), fileName);
+				   return badgesRepository.save(badges);
+				  }
+		
+		@Override
+		public List getAllBadgesBynom() {
+			return badgesRepository.getAllBadgesBynom();
+		
+}
 }
 
 		

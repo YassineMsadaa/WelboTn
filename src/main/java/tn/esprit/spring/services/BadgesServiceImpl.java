@@ -13,18 +13,20 @@ public interface BadgesServiceImpl {
 	List<Badges> retrieveAllBadges();
 	
 	Badges addbadge(Badges b);
-
+	
 	void deleteBadges(Integer id);
 
 	Badges updateBadges(Badges b);
 
 	Badges retrieveBadges(Integer id);
 	
-	Badges getFile(Long id);
+	Badges getFile(Integer id);
 	
-	Stream<Badges> loadAll();
+	Stream<Badges> getAllFiles();
 	
 	Badges store(MultipartFile file)throws IOException ;
+	
+	List<String> getAllBadgesBynom();
 }
 
 	

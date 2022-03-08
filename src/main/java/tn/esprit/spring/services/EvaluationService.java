@@ -20,9 +20,11 @@ public class EvaluationService implements EvaluationServiceImpl {
 		}
 return evaluation;
 	}
+	
 	@Override
 	public Evaluation addEvaluation(Evaluation e) {
 		Calendar calender = Calendar.getInstance();
+		System.out.println(Calendar.MONTH+Calendar.DECEMBER);
 		if (calender.get(Calendar.MONTH)==Calendar.DECEMBER)
 		{
 	    int month = calender.get(Calendar.MONTH);
@@ -31,6 +33,7 @@ return evaluation;
 		}
 		return evaluationRepository.save(e);
 	}
+	
 	@Override
 	public void deleteEvaluation(Integer id) {
 		evaluationRepository.deleteById(id);	
@@ -47,7 +50,6 @@ return evaluation;
 	}
 	@Override
 	public Evaluation findEvaluationByEmail(String email) {
-		// TODO Auto-generated method stub
 		return null;
 	}	
 }
