@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import tn.esprit.spring.entity.Likes;
+import tn.esprit.spring.entity.User;
 
 @Repository
 public interface LikesRepository extends CrudRepository <Likes,Long>{
@@ -35,8 +36,6 @@ public interface LikesRepository extends CrudRepository <Likes,Long>{
 	Long retrieveNewsFeedPostUserId(@Param("idforumpost") Long idforumpost);
 	*/
 	
-	/*
-	@Query(value = "SELECT * FROM users WHERE id=:userid",nativeQuery = true)
+	@Query(value = "SELECT * FROM user WHERE id=:userid",nativeQuery = true)
 	User retrieveUserFromUserId(@Param("userid") Long userid);
-	*/
 }

@@ -4,10 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
+
+import tn.esprit.spring.entity.ForumPosts;
 import tn.esprit.spring.entity.Likes;
 import tn.esprit.spring.entity.NotificationObject;
 import tn.esprit.spring.entity.Notifications;
+import tn.esprit.spring.entity.User;
+import tn.esprit.spring.service.IForumPostsService;
 import tn.esprit.spring.service.ILikesService;
+import tn.esprit.spring.service.IUserService;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -17,6 +22,10 @@ import java.util.List;
 public class LikesController {
 	@Autowired
 	ILikesService LikesService;
+	@Autowired
+	IUserService UserService;
+	@Autowired
+	IForumPostsService ForumPostsService;
 	@Autowired
     public JavaMailSender emailSender;
 	
@@ -30,11 +39,10 @@ public class LikesController {
 	return listLikes;
 	}
 	
-	public void LikeNotification(String poster, String liker) {
+	public void LikeNotification(String poster, String liker, String Mail) {
 		
 		//forumpostid tjib beha forum
 		//forum tjib menou id luser(poster)
-		//like tjib menha id luser(liker)
 
     	//String poster = "esmek";//esm eli habet lpost
     	//String liker = "esmou";//esm eli 7at like
@@ -42,7 +50,7 @@ public class LikesController {
     	// Create a Simple MailMessage.
         SimpleMailMessage message = new SimpleMailMessage();
         
-        message.setTo("farouk.belhassine@esprit.tn");//mail ta3 luser(poster)
+        message.setTo(Mail);//mail ta3 luser(poster)
         message.setSubject("Like notification!");
         message.setText("Hello "+poster+", your post was liked by "+liker+", go check it out!");
 
@@ -65,16 +73,33 @@ public class LikesController {
 		
 		if(L.getForumPost().getId()!=null){
 			Notifications N = new Notifications(LikesService.retrieveForumPostUserId(L.getForumPost().getId()),no);
-			System.out.println(no.toString());
+			User u = UserService.getUser(L.getUserId());
+			//User u = LikesService.retrieveUserFromUserId(L.getUserId());
+			String esm_li_7at_like = u.getUserName();
+			//u = LikesService.retrieveUserFromUserId(L.getForumPost().getUserId());
+			
+			ForumPosts fp = ForumPostsService.retreiveForumPostById(L.getForumPost().getId());
+			System.out.println("fp.getUserId() = "+fp.getUserId());
+			u = UserService.getUser(fp.getUserId());
+			String esli_li_habt_lpost = u.getUserName();
+			LikeNotification(esli_li_habt_lpost,esm_li_7at_like,u.getEmail());
 			LikesService.addNotification(N);
 		}
 		else if(L.getNewsFeedPostId()!=null){
-			Notifications N = new Notifications(LikesService.retrieveForumPostUserId(L.getNewsFeedPostId()),no);
-			//Notifications N = new Notifications(LikesService.retrieveNewsFeedPostUserId(L.getNewsFeedPostId()),LikesService.findlastobj());
+			Notifications N = new Notifications(LikesService.retrieveForumPostUserId(L.getForumPost().getId()),no);
+			//Notifications N = new Notifications(LikesService.retrieveForumPostUserId(L.getNewsFeedPostId()),no);
+			User u = UserService.getUser(L.getUserId());
+			//User u = LikesService.retrieveUserFromUserId(L.getUserId());
+			String esm_li_7at_like = u.getUserName();
+			//u = LikesService.retrieveUserFromUserId(L.getForumPost().getUserId());
+			
+			ForumPosts fp = ForumPostsService.retreiveForumPostById(L.getForumPost().getId());
+			System.out.println("fp.getUserId() = "+fp.getUserId());
+			u = UserService.getUser(fp.getUserId());
+			String esli_li_habt_lpost = u.getUserName();
+			LikeNotification(esli_li_habt_lpost,esm_li_7at_like,u.getEmail());
 			LikesService.addNotification(N);
 		}
-		
-		LikeNotification("esm moula lpost","esm li 7at like");
 		
 		return Like;
 	}

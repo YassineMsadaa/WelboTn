@@ -12,4 +12,5 @@ public interface IForumPostsService {
 	ForumPosts updateForumPost(ForumPosts fp);
 	List<ForumPosts> retrievePostByCateg(Long idcateg);
 	List<Likes> retrievePostLikes(Long forumpostid);
+	ForumPosts retreiveForumPostById(Long forumpostid);
 }
