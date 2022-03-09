@@ -67,13 +67,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/Notification/**").hasAuthority("ROLE_EMPLOYEE")
 				.antMatchers("/Questionnaire/**").hasAuthority("ROLE_ADMIN")
 				.antMatchers("/Question/**").hasAuthority("ROLE_ADMIN")
-				.antMatchers("/evaluation/**").hasAuthority("ROLE_EMPLOYEE")
-				.antMatchers("/badge/**").hasAuthority("ROLE_ADMIN")
-				.antMatchers("/votes/**").hasAuthority("ROLE_EMPLOYEE")
 				.antMatchers("/departement/**").hasAuthority("ROLE_ADMIN")
-				.antMatchers("/badge/retrieve-All-Badges").hasAuthority("ROLE_EMPLOYEE")
+
+				.antMatchers("/sendingEmail/**").hasAuthority("ROLE_ADMIN")
+				.antMatchers("/events/**").permitAll()
 			.antMatchers("/user/**").permitAll()
 			.antMatchers("/test/**").permitAll()
+			.antMatchers("/Event/saveEvent/**").permitAll()
+			
 			.anyRequest().authenticated();
 
 
