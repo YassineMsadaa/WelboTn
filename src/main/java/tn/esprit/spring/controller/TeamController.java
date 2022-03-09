@@ -1,5 +1,6 @@
 package tn.esprit.spring.controller;
 
+import tn.esprit.spring.entity.Event;
 import tn.esprit.spring.entity.Team;
 import tn.esprit.spring.entity.TeamPage;
 import tn.esprit.spring.entity.TeamSearchCriteria;
@@ -21,7 +22,7 @@ public class TeamController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Team>> getEmployees(TeamPage teamPage,
+    public ResponseEntity<Page<Team>> getTeamss(TeamPage teamPage,
                                                        TeamSearchCriteria teamSearchCriteria){
         return new ResponseEntity<>(teameService.getteamss(teamPage, teamSearchCriteria),
                 HttpStatus.OK);
@@ -31,4 +32,26 @@ public class TeamController {
     public ResponseEntity<Team> addEmployee(@RequestBody Team team){
         return new ResponseEntity<>(teameService.addteamss(team), HttpStatus.OK);
     }
-}
+    
+	
+	
+	
+	//   @ResponseBody
+	 //   public void UpdateEvent(@RequestBody Event e ) {
+		//	eventService.UpdateEvent(e);
+		
+	//	}
+	@PutMapping("/modify-Team")
+	@ResponseBody
+	public Team modifyTeam(@RequestBody Team t) {
+	return teameService.updateTeam(t);
+	}
+	
+	@DeleteMapping("deleteTeam/{id}")
+	@ResponseBody
+	public void deleteTeam(@PathVariable("id") Long idTeam) {
+		teameService.deleteTeamById(idTeam);
+	}
+	}	
+    
+   
