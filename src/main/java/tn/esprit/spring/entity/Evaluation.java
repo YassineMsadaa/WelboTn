@@ -8,8 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.List;
+import java.sql.Timestamp;
 
 @Entity
 @Getter
@@ -22,12 +21,10 @@ public class Evaluation implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String description;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar evaldate;
-	private String email;
+	private Timestamp evaldate;
 	@Enumerated (EnumType.STRING)
 	private ClassType classes;
 	@JsonIgnore
-	@ManyToMany(cascade= CascadeType.ALL)
-	private List<User> evalUser;
+	@OneToOne(cascade= CascadeType.ALL)
+	private User evalUser;
 	}

@@ -1,10 +1,9 @@
 package tn.esprit.spring.entity;
 
 
-import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -45,7 +44,6 @@ public class User implements Serializable {
     private Set<Role> roles = new HashSet<>();
     @ManyToOne
     private Departement departement;
-    
     
 	@JsonIgnore
 	@ManyToMany
