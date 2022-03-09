@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(	name = "user",
@@ -55,7 +52,18 @@ public class User implements Serializable {
 	@ManyToMany
 	private List <Team> teams ;
 
-
+ @JsonIgnore
+    @OneToMany(mappedBy="postedby", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<NewsfeedPost> newsfeedPosts = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy="reservedBy", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<OfferReservation> offerReservations = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy="commentedby", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Comment> comments = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy="subscriber", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<RssSubscription> subscriptions = new ArrayList<>();
 
     public User(String username, String email, String password) {
         this.userName = username;
