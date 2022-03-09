@@ -48,4 +48,9 @@ public class ForumPostsServiceImp implements IForumPostsService{
 		return PostLikes;
 	}
 
+	@Override
+	public ForumPosts retreiveForumPostById(Long forumpostid) {
+		return ForumPostsRepository.findById(forumpostid).get();
+	}
+
 }

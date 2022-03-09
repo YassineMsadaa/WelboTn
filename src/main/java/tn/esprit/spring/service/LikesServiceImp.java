@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.entity.Likes;
 import tn.esprit.spring.entity.NotificationObject;
 import tn.esprit.spring.entity.Notifications;
+import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.LikesRepository;
 
 @Service
@@ -68,11 +69,11 @@ public class LikesServiceImp implements ILikesService{
 	}
 	*/
 	
-	/*
+	
 	@Override
 	public User retrieveUserFromUserId(Long userid) {
 		User user = LikesRepository.retrieveUserFromUserId(userid);
 		return user;
 	}
-	*/
+	
 }
