@@ -1,11 +1,13 @@
 package tn.esprit.spring.services;
-import java.util.Calendar;
-import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import lombok.extern.slf4j.Slf4j;
 import tn.esprit.spring.entity.Evaluation;
 import tn.esprit.spring.reposi.EvaluationRepository;
+
+import java.util.Calendar;
+import java.util.List;
 @Service
 @Slf4j
 public class EvaluationService implements EvaluationServiceImpl {
@@ -24,12 +26,10 @@ return evaluation;
 	@Override
 	public Evaluation addEvaluation(Evaluation e) {
 		Calendar calender = Calendar.getInstance();
-		System.out.println(Calendar.MONTH+Calendar.DECEMBER);
+
 		if (calender.get(Calendar.MONTH)==Calendar.DECEMBER)
 		{
 	    int month = calender.get(Calendar.MONTH);
-		
-		System.out.println("DECEMBER");
 		}
 		return evaluationRepository.save(e);
 	}

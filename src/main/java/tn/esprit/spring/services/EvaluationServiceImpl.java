@@ -18,4 +18,10 @@ public interface EvaluationServiceImpl {
 
 	Evaluation findEvaluationByEmail(String email);
 
+	
+
+	
+
+	
+
 }
