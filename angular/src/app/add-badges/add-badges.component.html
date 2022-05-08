@@ -1,0 +1,24 @@
+<h3>Add Badges</h3>
+<form (ngSubmit) = "onSubmit()">
+    <div class ="form-group">
+        <label> Nom </label>
+        <input type="text" class ="form-control" id="nom"
+        [(ngModel)] = "badge.nom" name="nom">
+    </div>
+    <div class ="form-group">
+        <label> Data </label>
+        <input type="text" class ="form-control" id="Data"
+        [(ngModel)] = "badge.Data" name="Data">
+    </div>
+    <div class ="form-group">
+        <label> File Name </label>
+        <input type="text" class ="form-control" id="FileName"
+        [(ngModel)] = "badge.FileName" name="FileName">
+    </div>
+    <div class ="form-group">
+        <label> Description </label>
+        <input type="text" class ="form-control" id="Description"
+        [(ngModel)] = "badge.Description" name="Description">
+    </div>
+    <button class="btn btn-success" type="submit"></button>
+</form>
