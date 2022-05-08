@@ -1,0 +1,2 @@
+INDEX VERSION 1.130+C:\Users\trabe\OneDrive\Bureau\projet PI\Git\PIDEV-4eme-Bien-etre-au-travail-\.metadata\.plugins\org.eclipse.jdt.core
+1897810469.index
