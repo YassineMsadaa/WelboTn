@@ -1,0 +1,38 @@
+<!-- <p>evaluation works!</p> -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Description</th>
+            <th> Evaldate </th>
+            <th> Email </th>
+        </tr>
+    </thead>
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tbody *ngFor="let Evaluation of evaluation">
+                        <tr>
+                            <td> {{evaluation.Id}}</td>
+                            <td> {{evaluation.Description}}</td>
+                            <td> {{evaluation.Evaldate}}</td>
+                            <td> {{evaluation.Email}}</td>
+                            <!-- <td><a class="btn btn-danger" (clik)="deleteEvaluation(evaluation)">supprimer </a></td> -->
+                            <!-- <td><a class="btn btn-success" [routerLink]="[addEvaluation(evaluation)">supprimer </a></td> -->
+                        </tr>
+                    </tbody>
+                <!-- </thead> -->
+            </table>
+        </div>
+    </div>
+</div>
+<!-- <table class="table">
+    <thead>
+    <th>Id</th>
+    <th>Description</th>
+    <th>Evaldate</th>
+    <th>Email</th>
+    </thead>
+</table> -->

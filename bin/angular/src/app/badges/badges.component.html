@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <ul class ="navbar-nav">
+    <li class ="nav-item">
+      <a routerLink="badges" routerLinkActive ="active" class="nav-link">Badges</a>
+    </li>
+    <li class ="nav-item">
+        <a routerLink="addbadges" routerLinkActive ="active" class="nav-link">Add Badges</a>
+      </li>
+  </ul>
+</nav>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Nom</th>
+            <th> Data </th>
+            <th> FileName </th>
+            <th> Description </th>
+        </tr>
+    </thead>
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tbody *ngFor="let Badges of badges">
+                        <tr>
+                            <td> {{badges.Id}}</td>
+                            <td> {{badges.Nom}}</td>
+                            <td> {{badges.Data}}</td>
+                            <td> {{badges.FileName}}</td>
+                            <td> {{badges.Description}}</td>
+                            <!-- <td><a class="btn btn-danger" (clik)="add(badges)">ajouter </a></td> -->
+                        </tr>
+                    </tbody>
+                 <!-- </thead>  -->
+            </table>
+        </div>
+    </div>
+</div> 

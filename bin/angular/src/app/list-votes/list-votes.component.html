@@ -1,0 +1,14 @@
+<!-- <p>list-votes works!</p> -->
+<div class="col-md-6">
+    <h4>list-votes</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let vote of votes; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveVotes(vote, i)"
+      >
+        {{ Votes.Nbvotes }}
+      </li>
+    </ul>
+

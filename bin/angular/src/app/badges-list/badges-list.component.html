@@ -1,0 +1,21 @@
+<h2> Badges List </h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Nom </th>
+            <th> Data </th>
+            <th> FileName </th>
+            <th> Description </th>
+        </tr>
+    </thead>
+    <div class ="row">
+      <div class="col-md-3" *ngFor = " let Badges of badgesList">
+        <div class ="card" style="width: 18rem;">
+            <div class="card-body">
+            <td>{{badges.id}}</td>
+            <td>{{badges.nom}}</td>
+            <td>{{badges.data}}</td>
+            <td>{{badges.fileName}}</td>
+            <td>{{badges.description}}</td>   
+<!-- </table> -->

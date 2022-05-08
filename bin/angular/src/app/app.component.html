@@ -1,0 +1,40 @@
+<h3 class="text-center">{{title}}</h3>
+<div class ="container">
+  <!-- <app-badges-list></app-badges-list> -->
+  </div>
+
+<!-- <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/evaluation" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact:true}">Evaluation</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/badges" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact:true}">Badges</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/addBadges" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact:true}">addBadges</a>
+    </li>
+</ul> -->
+<!-- <a class="nav-link" routerLink="/votes" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact:true}">Votes</a>
+
+<div class="col-md-6">
+    <h4>list-votes</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let vote of votes; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveVotes(vote, i)"
+      >
+        {{ Votes.Nbvotes }}
+      </li>
+    </ul> -->
+<router-outlet></router-outlet>
+<footer class ="footer">
+    <div class ="container">
+    <span>All rights reserved 2022</span>
+  </div>
+</footer>
