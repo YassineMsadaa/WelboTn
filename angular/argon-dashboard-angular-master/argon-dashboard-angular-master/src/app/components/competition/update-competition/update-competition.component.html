@@ -1,0 +1,61 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-7 col-md-10">
+          <h1 class="display-2 text-white">Hello Jesse</h1>
+          <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">competition name</th>
+        <th scope="col">startTime</th>
+        <th scope="col">endTime</th>
+     
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{competitionToBeUpdated.idCompetition}}</th>
+        <td> {{competitionToBeUpdated.nameComp}} </td>
+        <td>{{competitionToBeUpdated.startTime }}</td>
+        <td>{{competitionToBeUpdated.endTime}}</td>
+      
+      </tr>
+  
+    </tbody>
+  </table>
+  
+  
+  <button (click)="update()" >Click to update</button>
+  
+  <form *ngIf="show" [formGroup]="updatedForm" (ngSubmit)="handelSubmitUpdate()">
+    <h2>Update: </h2>
+      <label>
+        competition name
+        <input type="text" formControlName="nameComp">
+      </label>
+  
+      <label>
+        startTime
+        <input type="date" formControlName="startTime">
+      </label>
+      <label>
+        endTime
+        <input type="date" formControlName="endTime">
+      </label>
+    
+      <input type="submit" value="Submit the updates" onClick="window.location.reload();">
+  
+    </form>
+  
+    <br>
+    <br>
+    <button type="button" class="btn btn-primary" [routerLink]="['/showAlls']">Go Back To Homepage</button>

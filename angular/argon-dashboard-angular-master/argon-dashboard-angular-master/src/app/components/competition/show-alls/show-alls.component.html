@@ -1,0 +1,108 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-7 col-md-10">
+          <h1 class="display-2 text-white">Hello Jesse</h1>
+          <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+          <a href="AddComp" class="btn btn-info">Add Competition</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Card tables</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+     
+                <th scope="col">#</th>
+                <th scope="col">Competition Name</th>
+                <th scope="col">startTime</th>
+                <th scope="col">endTime</th>
+                <th scope="col">Update</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let competition of listOfCompetitions">
+                <th scope="row">
+                  <div class="media align-items-center">
+                    {{competition.idCompetition}}
+                   
+                  </div>
+                </th>
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    <i class="bg-warning"></i> {{competition.nameComp}}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    <i class="bg-warning"></i> {{competition.startTime}}
+                  </span>
+                </td>
+  
+                <td>
+                  <div class="d-flex align-items-center">
+                    <span class="mr-2"> {{competition.endTime}}</span>
+                
+                  </div>
+                </td>
+               
+                <td><a class="btn btn-danger" (click)="delete(competition.idCompetition)" onClick="window.location.reload();">  Delete </a> </td>              
+                <td><button type="button" class="btn btn-warning" [routerLink]="['/competition/update-competition',competition.idCompetition]">Update</button></td>
+                
+              </tr>
+              <tr>
+              
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4">
+          <nav aria-label="...">
+            <ul class="pagination justify-content-end mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                  <i class="fas fa-angle-left"></i>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="javascript:void(0)">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)">2 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)">
+                  <i class="fas fa-angle-right"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+    
+  
+  
