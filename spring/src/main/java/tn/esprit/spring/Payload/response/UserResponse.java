@@ -16,15 +16,21 @@ public class UserResponse {
     private String email;
     private String password;
     private boolean isBlocked;
+    private String jobTitle;
     private Timestamp birthDate;
     private String cellPhoneNumber;
     private String homePhoneNumber;
     private byte[] profilePicture;
     private String verificationCode ;
     private Set<Role> roles;
-    private Departement departement;
+    private String departement;
+    private String address;
+    private String city;
+    private String country;
+    private String postalCode;
+    private String aboutMe;
 
-    public UserResponse(Long id, String userName, String name, String lastName, String nid, String email, String password, boolean isBlocked, Timestamp birthDate, String cellPhoneNumber, String homePhoneNumber, byte[] profilePicture, String verificationCode, Set<Role> roles, Departement departement) {
+    public UserResponse(Long id, String userName, String name, String lastName, String nid, String email, String password, boolean isBlocked, String jobTitle, Timestamp birthDate, String cellPhoneNumber, String homePhoneNumber, byte[] profilePicture, String verificationCode, Set<Role> roles, String departement, String address, String city, String country, String postalCode, String aboutMe) {
         this.id = id;
         this.userName = userName;
         this.name = name;
@@ -33,6 +39,7 @@ public class UserResponse {
         this.email = email;
         this.password = password;
         this.isBlocked = isBlocked;
+        this.jobTitle = jobTitle;
         this.birthDate = birthDate;
         this.cellPhoneNumber = cellPhoneNumber;
         this.homePhoneNumber = homePhoneNumber;
@@ -40,6 +47,51 @@ public class UserResponse {
         this.verificationCode = verificationCode;
         this.roles = roles;
         this.departement = departement;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.aboutMe = aboutMe;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
     }
 
     public Long getId() {
@@ -154,11 +206,11 @@ public class UserResponse {
         this.roles = roles;
     }
 
-    public Departement getDepartement() {
+    public String getDepartement() {
         return departement;
     }
 
-    public void setDepartement(Departement departement) {
+    public void setDepartement(String departement) {
         this.departement = departement;
     }
 }

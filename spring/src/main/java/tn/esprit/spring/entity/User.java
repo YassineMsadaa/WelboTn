@@ -27,7 +27,14 @@ public class User implements Serializable {
     private String nid;
     private String email;
     private String password;
-    private boolean isBlocked;
+    private boolean blocked;
+    private String jobTitle;
+    private String address;
+    private String city;
+    private String country;
+    private String postalCode;
+    private String aboutMe;
+
     private Timestamp birthDate;
     private String cellPhoneNumber;
     private String homePhoneNumber;
@@ -39,8 +46,8 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-    @ManyToOne
-    private Departement departement;
+
+    private String departement;
     
 	@JsonIgnore
 	@ManyToMany
@@ -75,7 +82,7 @@ public class User implements Serializable {
 
     }
 
-    public User(Long id, String userName, String name, String lastName, String nid, String email, String password,  boolean isBlocked, Timestamp birthDate, String cellPhoneNumber, String homePhoneNumber, byte[] profilePicture, String verificationCode, Set<Role> roles, Departement departement) {
+    public User(Long id, String userName, String name, String lastName, String nid, String email, String password, boolean blocked, String jobTitle, String address, String city, String country, String postalCode, String aboutMe, Timestamp birthDate, String cellPhoneNumber, String homePhoneNumber, byte[] profilePicture, String verificationCode, Set<Role> roles, String departement, List<Event> events, List<Competition> competitions, List<Team> teams, List<NewsfeedPost> newsfeedPosts, List<OfferReservation> offerReservations, List<Comment> comments, List<RssSubscription> subscriptions) {
         this.id = id;
         this.userName = userName;
         this.name = name;
@@ -83,7 +90,13 @@ public class User implements Serializable {
         this.nid = nid;
         this.email = email;
         this.password = password;
-        this.isBlocked = isBlocked;
+        this.blocked = blocked;
+        this.jobTitle = jobTitle;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.aboutMe = aboutMe;
         this.birthDate = birthDate;
         this.cellPhoneNumber = cellPhoneNumber;
         this.homePhoneNumber = homePhoneNumber;
@@ -91,6 +104,53 @@ public class User implements Serializable {
         this.verificationCode = verificationCode;
         this.roles = roles;
         this.departement = departement;
+        this.events = events;
+        this.competitions = competitions;
+        this.teams = teams;
+        this.newsfeedPosts = newsfeedPosts;
+        this.offerReservations = offerReservations;
+        this.comments = comments;
+        this.subscriptions = subscriptions;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
     }
 
     public Long getId() {
@@ -151,11 +211,75 @@ public class User implements Serializable {
     }
 
     public boolean isBlocked() {
-        return isBlocked;
+        return blocked;
     }
 
     public void setBlocked(boolean blocked) {
-        isBlocked = blocked;
+        this.blocked = blocked;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<Competition> getCompetitions() {
+        return competitions;
+    }
+
+    public void setCompetitions(List<Competition> competitions) {
+        this.competitions = competitions;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    public List<NewsfeedPost> getNewsfeedPosts() {
+        return newsfeedPosts;
+    }
+
+    public void setNewsfeedPosts(List<NewsfeedPost> newsfeedPosts) {
+        this.newsfeedPosts = newsfeedPosts;
+    }
+
+    public List<OfferReservation> getOfferReservations() {
+        return offerReservations;
+    }
+
+    public void setOfferReservations(List<OfferReservation> offerReservations) {
+        this.offerReservations = offerReservations;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<RssSubscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(List<RssSubscription> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 
     public Date getBirthDate() {
@@ -198,11 +322,11 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public Departement getDepartement() {
+    public String getDepartement() {
         return departement;
     }
 
-    public void setDepartement(Departement departement) {
+    public void setDepartement(String departement) {
         this.departement = departement;
     }
 

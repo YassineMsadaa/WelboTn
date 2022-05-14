@@ -34,7 +34,8 @@ public class MOCService {
     return in;
   }
 
-  public List<MembersOfCompany> getAllTutorials() {
+
+  public List<MembersOfCompany> getAll() {
     return (List<MembersOfCompany>) membresOfCompany.findAll();
   }
 }

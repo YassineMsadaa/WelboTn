@@ -17,13 +17,66 @@ public class UserUpdateRequest {
 	private String name;
 	private String lastName;
 	private boolean isBlocked;
+	private String jobTitle;
+	private String address;
+	private String city;
+	private String country;
+	private String postalCode;
+	private String aboutMe;
 	private Timestamp birthDate;
 	private String cellPhoneNumber;
 	private String homePhoneNumber;
 	private byte[] profilePicture;
 	private Set<Role> roles = new HashSet<>();
-	private Departement departement;
+	private String departement;
 
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getAboutMe() {
+		return aboutMe;
+	}
+
+	public void setAboutMe(String aboutMe) {
+		this.aboutMe = aboutMe;
+	}
 
 	public Long getId() {
 		return id;
@@ -129,9 +182,9 @@ public class UserUpdateRequest {
 		this.roles = roles;
 	}
 
-	public Departement getDepartement() {return departement;}
+	public String getDepartement() {return departement;}
 
-	public void setDepartement(Departement departement) {
+	public void setDepartement(String departement) {
 		this.departement = departement;
 	}
 }

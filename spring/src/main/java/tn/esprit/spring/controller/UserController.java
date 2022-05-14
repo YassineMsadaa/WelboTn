@@ -22,7 +22,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
+import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -37,28 +39,14 @@ public class UserController {
     String FILE_DIRECTORY;
 
     @PutMapping("/updateuser")
-    public ResponseEntity<?> registerClient(@RequestParam("userId") Long id,@RequestBody UserUpdateRequest body) {
+    public ResponseEntity<?> registerClient(@RequestBody User body) {
 
-        /*CharSequence chars ="&é'(-_)=1234567890²#{[|^@]}=+°£%§/.?,;:!*<>$";
-        if (body.getName().length()>20 || body.getName().contains( chars) ){
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: name is too long or contains symbols !"));
-        }*/
-
-        User user = userRepository.findById(id).get();
-        user.setName(body.getName());
-        user.setLastName(body.getLastName());
-        user.setDepartement(body.getDepartement());
-        user.setBirthDate((Timestamp) body.getBirthDate());
-        user.setCellPhoneNumber(body.getCellPhoneNumber());
-        user.setHomePhoneNumber(body.getHomePhoneNumber());
-        user.setProfilePicture(body.getProfilePicture());
-        userRepository.save(user);
+        userRepository.save(body);
         return ResponseEntity
                 .ok()
                 .body(new MessageResponse("Account is updated successfully"));
     }
+
     @PutMapping("/uploadprofilepic")
     public @ResponseBody ResponseEntity<?> createForumPost(@RequestParam("userId") Long UserId, Model model, HttpServletRequest request, final @RequestParam("profilepic") MultipartFile file) {
         try {
@@ -94,26 +82,17 @@ public class UserController {
         }
     }
 
-    @GetMapping("/profile")
-    public UserResponse getUser(@RequestParam("userId") Long id) {
+    @GetMapping("/profile/{userId}")
+    public User getUser(@PathVariable("userId") Long id) {
 
         User user = userRepository.findById(id).get();
-        UserResponse userResponse = new UserResponse(user.getId(),
-                user.getUserName(),
-                user.getName(),
-                 user.getLastName(),
-                 user.getNid(),
-                 user.getEmail(),
-                 user.getPassword(),
-                 user.isBlocked(),
-                (Timestamp) user.getBirthDate(),
-                 user.getCellPhoneNumber(),
-                 user.getHomePhoneNumber(),
-                 user.getProfilePicture(),
-                 user.getVerificationCode(),
-                 user.getRoles(),
-                 user.getDepartement());
-        return userResponse;
+        return user;
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getUsers(){
+        List<User> users = (List<User>) userRepository.findAll();
+        return new ResponseEntity<List<User>>(users,HttpStatus.OK);
     }
 
 }

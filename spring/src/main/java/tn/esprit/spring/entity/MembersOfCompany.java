@@ -8,22 +8,32 @@ import java.io.Serializable;
 public class MembersOfCompany implements Serializable {
     @Id
     private String nid;
-    private String nameAndLastName;
+    private String name;
+    private String lastName;
 
-    public MembersOfCompany(String nid, String nameAndLastName) {
+    public MembersOfCompany(String nid, String name, String lastName) {
         this.nid = nid;
-        this.nameAndLastName = nameAndLastName;
+        this.name = name;
+        this.lastName = lastName;
     }
 
     public MembersOfCompany() {
     }
 
-    public String getNameAndLastName() {
-        return nameAndLastName;
+    public String getName() {
+        return name;
     }
 
-    public void setNameAndLastName(String nameAndLastName) {
-        this.nameAndLastName = nameAndLastName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getNid() {

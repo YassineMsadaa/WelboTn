@@ -18,9 +18,7 @@ public class Departement implements Serializable {
     private String name;
 
     private String description;
-    @JsonIgnore
-    @OneToMany (mappedBy = "departement")
-    private List<User> users;
+
 
     public Departement(Long id, String name, String description) {
         Id = id;
@@ -43,7 +41,5 @@ public class Departement implements Serializable {
 
     public void setDescription(String description) {this.description = description;}
 
-    public List<User> getUsers() {return users;}
 
-    public void setUsers(List<User> users) {this.users = users;}
 }

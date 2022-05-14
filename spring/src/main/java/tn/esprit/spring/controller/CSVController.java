@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.spring.entity.MembersOfCompany;
 import tn.esprit.spring.Payload.response.MessageResponse;
+import tn.esprit.spring.repository.IMembresOfCompany;
 import tn.esprit.spring.service.MOCService;
 import tn.esprit.spring.helper.CSVHelper;
 
 import java.util.List;
 
-
+@CrossOrigin
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class CSVController {
 
   @Autowired
@@ -49,7 +50,7 @@ public class CSVController {
   @GetMapping("/csv/MOCs")
   public ResponseEntity<List<MembersOfCompany>> getAllMembersOfCompanys() {
     try {
-      List<MembersOfCompany> tutorials = fileService.getAllTutorials();
+      List<MembersOfCompany> tutorials = fileService.getAll();
 
       if (tutorials.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -70,6 +71,15 @@ public class CSVController {
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
         .contentType(MediaType.parseMediaType("text/csv"))
         .body(file);
+  }
+  @Autowired
+  IMembresOfCompany imoc;
+  @DeleteMapping("/csv/delete")
+  public ResponseEntity< ? > deleteAll(){
+    imoc.deleteAll();
+    return ResponseEntity
+            .ok()
+            .body(new MessageResponse(" Deleted successfully!"));
   }
 
 }

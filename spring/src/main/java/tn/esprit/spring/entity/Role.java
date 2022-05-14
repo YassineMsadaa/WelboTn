@@ -16,12 +16,21 @@ public class Role {
 	private ERole name;
 
 
-	public Role() {
+	public Role(int id, String role_employee) {
 
+	}
+
+	public Role(Integer id, ERole name) {
+		this.id = id;
+		this.name = name;
 	}
 
 	public Role(ERole name) {
 		this.name = name;
+	}
+
+	public Role() {
+
 	}
 
 	public Integer getId() {

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CSVHelper {
   public static String TYPE = "text/csv";
-  static String[] HEADERs = { "nid", "nameAndLastName" };
+  static String[] HEADERs = { "nid", "name" , "lastname"};
 
   public static boolean hasCSVFormat(MultipartFile file) {
     if (!TYPE.equals(file.getContentType())) {
@@ -32,7 +32,7 @@ public class CSVHelper {
       for (CSVRecord csvRecord : csvRecords) {
         MembersOfCompany MOC;
 
-        MOC = new MembersOfCompany(csvRecord.get(0),csvRecord.get(1));
+        MOC = new MembersOfCompany(csvRecord.get(0),csvRecord.get(1),csvRecord.get(2));
 
         MOCs.add(MOC);
       }
@@ -49,7 +49,8 @@ public class CSVHelper {
         CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
       for (MembersOfCompany MOC : MOCs) {
         List<String> data = Arrays.asList(
-                MOC.getNameAndLastName(),
+                MOC.getLastName(),
+                MOC.getName(),
                 MOC.getNid()
             );
 

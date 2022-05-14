@@ -57,7 +57,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/auth/**").permitAll()
-				.antMatchers("/csv/**").hasAuthority("ROLE_ADMIN")
 				.antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 				.antMatchers("/ForumPosts/**").hasAuthority("ROLE_EMPLOYEE")
 				.antMatchers("/categorie/**").hasAuthority("ROLE_ADMIN")
